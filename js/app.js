@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
 	$('.alert').hide();
+	// $('#menu-table').empty();
 
 });
+$('.alert').hide();
 
 $("#searchbox").keyup(function(event){
     if(event.keyCode == 13){
@@ -61,7 +63,20 @@ $('#search').click(function() {
 			}
 			else{
 
-				$('#menu-table tbody').empty();
+				$('#menu-table').empty();
+
+
+				
+
+
+
+				// var table_header = '<th>'+"Item"+'</th><th>'+"Cost"+'</th>';
+				// console.log("before table");
+				// $('#menu-table thead').append(table_header);
+				// console.log("thead built");
+				// console.log($('#menu-table').html());
+				createTHead();
+				$('menu-table').show();
 
 				$('.alert').hide();
 
@@ -83,37 +98,40 @@ $('#search').click(function() {
 								
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
-								$('#menu-table tbody').append(nextRow);								
+								console.log(nextRow);
+								$('#menu-table').append(nextRow);	
+								console.log($('#menu-table tbody').html());
+								// console.log($('#menu-table').html());							
 
 							}
 						}
-						var q = 'https://api.nutritionix.com/v1_1/search/' 
-								+ location 
-								+ '?results=0%3A50&fields='
-								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
-								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
+						// var q = 'https://api.nutritionix.com/v1_1/search/' 
+						// 		+ location 
+						// 		+ '?results=0%3A50&fields='
+						// 		+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
+						// 		+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
 
-						var dataObj = {};
+						// var dataObj = {};
 
 
-						$.get(q,function(data){
-							for(var i = 0; i < food.length; i++){
-								for(var j = 0; j < data["hits"].length; j++){
-									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
-									var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
-									if(of.indexOf(f) > -1){
-										dataObj[food[i]] = {
-											"calories" : data["hits"][j]["fields"]["nf_calories"],
-											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
-											"protein" : data["hits"][j]["fields"]["nf_protein"]
+						// $.get(q,function(data){
+						// 	for(var i = 0; i < food.length; i++){
+						// 		for(var j = 0; j < data["hits"].length; j++){
+						// 			var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
+						// 			var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
+						// 			if(of.indexOf(f) > -1){
+						// 				dataObj[food[i]] = {
+						// 					"calories" : data["hits"][j]["fields"]["nf_calories"],
+						// 					"fat" : data["hits"][j]["fields"]["nf_total_fat"],
+						// 					"protein" : data["hits"][j]["fields"]["nf_protein"]
 
-										};
-										break;
-									} 
-								}	
-							}
-							console.log(dataObj);
-						});
+						// 				};
+						// 				break;
+						// 			} 
+						// 		}	
+						// 	}
+						// 	console.log(dataObj);
+						// });
 
 					});
 
@@ -123,5 +141,18 @@ $('#search').click(function() {
 
 
 		});
+
+function createTHead() {
+        var x = document.getElementById("menu-table");
+        // if (!x.tHead) {
+            var header = x.createTHead();
+            var row = header.insertRow(0);
+            var cell0 = row.insertCell(0);
+            cell0.innerHTML = "Item";
+            var cell1 = row.insertCell(1);
+            cell1.innerHTML = "Cost";
+        // }
+    }
+
 
 });
