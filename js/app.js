@@ -107,14 +107,15 @@ $('#search').click(function() {
 											"calories" : data["hits"][j]["fields"]["nf_calories"],
 											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
 											"protein" : data["hits"][j]["fields"]["nf_protein"],
-											"score" : ((1 / ((parseInt(data["hits"][j]["fields"]["nf_calories"]))/10)) * (parseInt(data["hits"][j]["fields"]["nf_protein"])/100) * (1/(parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)))*100
+
+											"score" : ((1 / ((parseInt(data["hits"][j]["fields"]["nf_calories"]))/1)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/1000) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*10)))*100
 
 										});
 										break;
 									} 
 								}	
 							}
-							console.log(dataObj);
+							
 
 							function compare(a,b) {
 									if (a["score"] < b["score"])
@@ -127,8 +128,20 @@ $('#search').click(function() {
 
 
 							dataObj.sort(compare);
+							
+							var calUI = 300;
+
 							console.log(dataObj);
-							console.log(dataObj["score"]);
+							
+							// deletes objects with calories out of bounds	
+							for (var i = 0 ; i < dataObj.length; i++){
+								if (dataObj[i]["calories"] > calUI)
+									delete dataObj[i];
+							}
+
+							
+
+							console.log(dataObj);
 						});
 
 					});
