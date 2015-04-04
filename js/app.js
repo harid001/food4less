@@ -58,6 +58,7 @@ $('#search').click(function() {
 			if(id.length === 0){
 				console.log("unable to find restaurant near location");
 				$('.alert').show();
+				
 			}
 			else{
 
