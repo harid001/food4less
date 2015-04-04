@@ -6,14 +6,17 @@ $(document).ready(function(){
 	$('.alert').hide();
     $('#money').hide();
     $('#calories').hide();
-    $('#search').hide();
     $('#sidenote').hide();
+    $('#search').hide();
+    $('#next').hide();
     $('#again').hide();
+    $('#menu-table').hide();
+    $('#save').hide();
 });
 
 $('.form-control').keyup(function(event){
     if(event.keyCode == 13){
-        if(click < 2){
+        if(click % 3 < 2){
             $('#next').click();
         }
         else{
@@ -36,16 +39,19 @@ $('#next').click(function() {
                     
                     $('#money').delay("slow").fadeIn('slow'); 
                     $('#sidenote').delay("slow").fadeIn('slow'); 
+                    $('#calories-input').val("");
                 }
                 break;
             case 2:
                 var cost = $('#money-input').val();
-                
-                $('#money').fadeOut('slow'); 
-                $('#next').fadeOut("slow");
-                
-                $('#calories').delay("slow").fadeIn('slow');               
-                $('#search').delay("slow").fadeIn("slow");                
+                if(cost == '' ){
+                    click--;
+                }
+                else{
+                    $('#money').fadeOut('slow'); 
+                    $('#next').fadeOut("slow");
+                    $('#calories').delay("slow").fadeIn('slow'); 
+                }
                 break;
     }
 });
@@ -54,9 +60,7 @@ $('#again').click(function() {
     click = 0;
     //reset chart
     //reset variables
-    $('#again').fadeOut("slow");
     $('#restaurant').delay("slow").fadeIn("slow");
-    $('#next').delay("slow").fadeIn("slow");
     //reset inputs
     $('#calories-input').val("");
     $('#money-input').val("");
@@ -66,15 +70,24 @@ $('#again').click(function() {
 $('#search').click(function() {
     
     var calories = $('#calories-input').val();
-    
+    if(calories == ''){
+    }
+    else{
     $('#calories').fadeOut('slow'); 
-    $('#search').fadeOut('slow');
     $('#sidenote').fadeOut("slow");
     
-    // fade in restaurant name
-    $('#again').delay("slow").fadeIn("slow");
+    click = 0;
+    //reset chart
+    //reset variables
+    $('#restaurant').delay("slow").fadeIn("slow");
+    //reset inputs
     
-            
+    $('#money-input').val("");
+    $('#restaurant-input').val("");
+    $('#menu-table').delay('show').fadeIn('slow');
+    // fade in restaurant name
+    
+    
     
 	
 
@@ -187,4 +200,5 @@ $('#search').click(function() {
 
 
 		});
+    }
 });
