@@ -13,6 +13,14 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Load c3.css -->
+    <link href="css/c3.css" rel="stylesheet" type="text/css">
+
+    <!-- Load d3.js and c3.js -->
+    <script src="js/d3.min.js" charset="utf-8"></script>
+    <script src="js/c3.min.js"></script>
+    <script src="js/test.js"></script>
 
     <!-- Custom CSS -->
     <style>
@@ -67,27 +75,54 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>A Bootstrap Starter Template</h1>
                 <p class="lead">Complete with pre-defined file paths that you won't have to change!</p>
                 <ul class="list-unstyled">
                     <li>Bootstrap v3.3.1</li>
-                    <li>jQuery v1.11.1</li>
+                    <li>Trevor</li>
                 </ul>
             </div>
         </div>
         <!-- /.row -->
-
-    </div>
+        
+        <div id="chart"></div>
+        <!--/.chart-->        
+        
+    </div>    
     <!-- /.container -->
+
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    
+    <!--Chart JS-->
+    <script>
+        var chart = c3.generate({
+    data: {
+        columns: [
+            ['Cost', 30, 200, 100, 400, 150, 250],
+            ['Calories', 130, 100, 140, 200, 150, 50]
+        ],
+        type: 'bar',
+        colors:{
+            Cost: '#99e632',
+            Calories: '#000000'
+        },
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
+    }
+});
+    </script>
 
 </body>
 
