@@ -134,7 +134,7 @@ $('#search').click(function() {
 								
 							}						
 
-							dataObj.sort(compareCal);
+							//dataObj.sort(compareCal);
 							
 							var calUI = 300;
 
@@ -162,20 +162,26 @@ $('#search').click(function() {
 
 
 							var ans = [];
-							console.log(dataObj2);	
-
-							for (var i = 0; i < dataObj2.length; i++){
-								for (var j = i+1; j < dataObj2.length; j++){
-									if (dataObj2[i]["calories"]+dataObj2[j]["calories"] < calUI){
-										ans.push(dataObj2[i]);
-										ans.push(dataObj2[j]);
-									} 
-								}
-							}
-
+							var foodNum = 2;
+							//console.log(dataObj2);
 							dataObj2.sort(compare);
-							console.log(dataObj2);
-							console.log(ans);
+
+							if (foodNum == 2){	
+
+								for (var i = 0; i < dataObj2.length; i++){
+									for (var j = i+1; j < dataObj2.length; j++){
+										if (dataObj2[i]["calories"]+dataObj2[j]["calories"] < calUI){
+											ans.push(dataObj2[i]);
+											ans.push(dataObj2[j]);
+										} 
+									}
+								}
+
+								console.log(ans);
+								
+							} else {
+								console.log(dataObj2);
+							}
 
 							
 						});
