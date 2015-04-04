@@ -42,12 +42,17 @@ $('#search').click(function() {
 			var response = data["response"];
 			var id = '';
 			for( var i = 0; i < response["venues"].length; i++){
-				if(response["venues"][i]["name"].toLowerCase().replace(/WD/,'') === location.toLowerCase().replace(/WD/,'')){
+
+				console.log(location.toLowerCase().replace(/\s/g,''));
+				console.log((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')));
+
+				if((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')).contains(location.toLowerCase().replace(/\s/g,''))){
+					console.log(location.toLowerCase().replace(/\s/g,''));
 					id = response["venues"][i]["id"];
 					break;
 				}
 			}
-			if(id.length == 0){
+			if(id.length === 0){
 				console.log("unable to find restaurant near location");
 				$('.alert').show();
 			}
@@ -55,8 +60,8 @@ $('#search').click(function() {
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
 
-				$.get('https://api.foursquare.com/v2/venues/' + id + '/menu?' + 'client_id=' + clientId 
-					+ '&client_secret=' + clientSecret + '&v=20140806&m=foursquare', 
+				$.get('https://api.foursquare.com/v2/venues/' + id + '/menu?' + 'client_id=' + clientId
+					+ '&client_secret=' + clientSecret + '&v=20140806&m=foursquare',
 					function (data) {
 						var menu = data["response"]["menu"]["menus"]["items"][0]["entries"]["items"];
 						for(var i = 0; i < menu.length; i++){
@@ -68,7 +73,7 @@ $('#search').click(function() {
 							}
 						}
 
-					}); 
+					});
 
 			}
 
