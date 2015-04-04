@@ -148,10 +148,6 @@ $('#search').click(function() {
 							}
 
 
-							var max = 0;
-							var m = [];
-
-
 							function compareCal(a,b) {
 									if (a["calories"] > b["calories"])
      									return 1;
@@ -163,6 +159,8 @@ $('#search').click(function() {
 
 							dataObj.sort(compareCal)
 
+
+							var max = 0;
 							// debug this part, this method gives all of the possible combination for food items that have less than the maximum amount of calories.
 							function combinations(){
 								for (var i = 0 ; i < dataObj.length; i++){
@@ -188,9 +186,6 @@ $('#search').click(function() {
 					});
 
 			}
-
-
-
 
 		});
 
