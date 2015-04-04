@@ -134,17 +134,20 @@ $('#search').click(function() {
 								
 							}						
 
-							dataObj.sort(compare);
+							dataObj.sort(compareCal);
 							
 							var calUI = 300;
 
 							console.log(dataObj);
 
-							
+							var dataObj2 = [];
 							// deletes objects with calories out of bounds	
 							for (var i = 0 ; i < dataObj.length; i++){
-								if (dataObj[i]["calories"] > calUI)
-									delete dataObj[i];
+								if (dataObj[i]["calories"] > calUI){
+									//delete dataObj[i];
+								}else {
+									dataObj2.push(dataObj[i]);
+								}
 							}
 
 
@@ -157,30 +160,24 @@ $('#search').click(function() {
 								
 							}
 
-							dataObj.sort(compareCal)
 
+							var ans = [];
+							console.log(dataObj2);	
 
-							var max = 0;
-							// debug this part, this method gives all of the possible combination for food items that have less than the maximum amount of calories.
-							function combinations(){
-								for (var i = 0 ; i < dataObj.length; i++){
-
-									if (max < calUI){
-										max+=parseInt(dataObj[i]["calories"]); 
-										alert(parseInt(dataObj[i]["calories"]));
-										//m.push(i);
-									} else {
-										alert(dataObj);
-										delete dataObj[i];
-									}
-
-								} 
-
+							for (var i = 0; i < dataObj2.length; i++){
+								for (var j = i+1; j < dataObj2.length; j++){
+									if (dataObj2[i]["calories"]+dataObj2[j]["calories"] < calUI){
+										ans.push(dataObj2[i]);
+										ans.push(dataObj2[j]);
+									} 
+								}
 							}
 
-							dataObj.sort(compare);
+							dataObj2.sort(compare);
+							console.log(dataObj2);
+							console.log(ans);
 
-							console.log(dataObj);
+							
 						});
 
 					});
