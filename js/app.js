@@ -9,11 +9,17 @@ $(document).ready(function(){
     $('#fat').hide();
     $('#search').hide();
     $('#sidenote').hide();
+    $('#again').hide();
 });
 
-$('#searchbox').keyup(function(event){
+$('.form-control').keyup(function(event){
     if(event.keyCode == 13){
-        $('#search').click();
+        if(click < 4){
+        $('#next').click();
+        }
+        else{
+            $('#search').click();
+        }
     }
 });
 
@@ -55,12 +61,24 @@ $('#next').click(function() {
     }
 });
 
+$('#again').click(function() {
+    count = 0;
+    //reset chart
+    //reset variables
+    $('#again').fadeOut("slow");
+    $('#restaurant').delay("slow").fadeIn("slow");
+    $('#next').delay("slow").fadeIn("slow");
+    //reset inputs
+});
+
 $('#search').click(function() {
     
     var fat = $('#fat-input').val();
     $('#fat').fadeOut('slow'); 
     $('#search').fadeOut('slow');
     $('#sidenote').fadeOut("slow");
+    // fade in restaurant name
+    $('#again').delay("slow").fadeIn("slow");
     
             
     
@@ -175,5 +193,4 @@ $('#search').click(function() {
 
 
 		});
-
 });
