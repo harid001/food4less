@@ -41,28 +41,15 @@ $('#next').click(function() {
             case 2:
                 var cost = $('#money-input').val();
                 $('#money').fadeOut('slow'); 
-                $('#calories').delay("slow").fadeIn('slow');
-                
-                break;
-            case 3:
-                var calories = $('#calories-input').val();
-                $('#calories').fadeOut('slow'); 
-                $('#protein').delay("slow").fadeIn('slow');
-            
-                break;
-            case 4:
-                var protein = $('#protein-input').val();
-                $('#protein').fadeOut('slow');
                 $('#next').fadeOut("slow");
-                $('#fat').delay("slow").fadeIn('slow');                  
-                $('#search').delay("slow").fadeIn("slow");
-                              
+                $('#calories').delay("slow").fadeIn('slow');               
+                $('#search').delay("slow").fadeIn("slow");                
                 break;
     }
 });
 
 $('#again').click(function() {
-    count = 0;
+    click = 0;
     //reset chart
     //reset variables
     $('#again').fadeOut("slow");
@@ -73,8 +60,8 @@ $('#again').click(function() {
 
 $('#search').click(function() {
     
-    var fat = $('#fat-input').val();
-    $('#fat').fadeOut('slow'); 
+    var calories = $('#calories-input').val();
+                $('#calories').fadeOut('slow'); 
     $('#search').fadeOut('slow');
     $('#sidenote').fadeOut("slow");
     // fade in restaurant name

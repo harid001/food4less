@@ -34,6 +34,35 @@
         font-style: normal;
 
     }
+        
+    @font-face {
+        font-family: 'walkway_boldregular';
+        src: url('Walkway Bold-webfont.eot');
+        src: url('Walkway Bold-webfont.eot?#iefix') format('embedded-opentype'),
+             url('Walkway Bold-webfont.woff2') format('woff2'),
+             url('Walkway Bold-webfont.woff') format('woff'),
+             url('Walkway Bold-webfont.ttf') format('truetype'),
+             url('Walkway Bold-webfont.svg#walkway_boldregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+
+
+
+    @font-face {
+        font-family: 'typo_groteskregular';
+        src: url('fonts/Typo Grotesk Demo-webfont.eot');
+        src: url('fonts/Typo Grotesk Demo-webfont.eot?#iefix') format('embedded-opentype'),
+             url('fonts/Typo Grotesk Demo-webfont.woff2') format('woff2'),
+             url('fonts/Typo Grotesk Demo-webfont.woff') format('woff'),
+             url('fonts/Typo Grotesk Demo-webfont.ttf') format('truetype'),
+             url('fonts/Typo Grotesk Demo-webfont.svg#typo_groteskregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+
+    }
 
     #font{
         padding-top: 16px;
@@ -52,6 +81,18 @@
         font-style: italic;
         font-size: 12px;
         
+    }
+        
+    label{
+        padding-right: 7px;
+        margin-bottom: -20px;
+        font-size: 25px;
+        font-family: 'typo_groteskregular';
+        letter-spacing: -1px;
+    }
+        
+    td, th{
+        font-family: 'typo_groteskregular';
     }
 
         
@@ -90,7 +131,7 @@
             <center>
                 <form class="form-inline" role="form">
                     <div class="form-group" id = "restaurant">
-                        <label>I want to eat at </label>
+                        <label>I want to eat at  </label>
                         <input type="text" class="form-control text-center" placeholder="restaurant" id = "restaurant-input">
                     </div>
                     <div class="form-group" id = "money">
@@ -98,17 +139,17 @@
                         <input type="text" class="form-control text-center" placeholder="dollars*" id = "money-input">
                     </div>
                     <div class="form-group" id = "calories">
-                        <label>  I want to consume a </label>
+                        <label>  I want to consume a  </label>
                         <input type="text" class="form-control text-center" placeholder="low/medium/high*" id = "calories-input">
                         <label for="pwd"> amount of calories</label>
                     </div>
                     <div class="form-group" id = "protein">
-                        <label>  I want to consume a </label>
+                        <label>  I want to consume a  </label>
                         <input type="text" class="form-control text-center" placeholder="low/medium/high*" id = "protein-input">
                         <label for="pwd"> amount of protein</label>
                     </div>
                     <div class="form-group" id = "fat">
-                        <label>  I want to consume a </label>
+                        <label>  I want to consume a  </label>
                         <input type="text" class="form-control text-center" placeholder="low/medium/high*" id = "fat-input">
                         <label for="pwd"> amount of fat</label>
                     </div>
