@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -34,7 +35,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -46,20 +47,6 @@
                 </button>
                 <a class="navbar-brand" href="#">Start Bootstrap</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -69,14 +56,40 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>A Bootstrap Starter Template</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.1</li>
-                    <li>jQuery v1.11.1</li>
-                </ul>
+            <div class="col-lg-12 text-center pagination-centered">
+                <div class="input-group input-group-lg col-center">
+                    <input type="text" class="form-control text-center" placeholder="restaurant name" aria-describedby="sizing-addon1">
+                </div>
             </div>
+        </div>
+
+        <div class="row col-center">
+
+            <div  class="text-center">
+                <button id = "search" type="button" class="btn btn-success">search</button>
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <center>
+
+                <table class="table table-hover">
+                   <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cost</th>
+                            <th>Calories</th>
+
+                        </tr>
+
+                   </thead>
+                </table>
+       
+            </center>
+
         </div>
         <!-- /.row -->
 
@@ -88,6 +101,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/app.js"></script>
 
 </body>
 
