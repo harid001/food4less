@@ -95,7 +95,13 @@ $('#search').click(function() {
 
 						var dataObj = [];
 
-
+						var CAL = 1;
+						var PRICE = 80;
+						var LOW_PROTEIN = 1000;
+						var HIGH_PROTEIN = 10000;
+						var LOW_FAT = 100;
+						var HIGH_FAT = 10;
+						
 						$.get(q,function(data){
 							for(var i = 0; i < food.length; i++){
 								for(var j = 0; j < data["hits"].length; j++){
@@ -108,7 +114,9 @@ $('#search').click(function() {
 											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
 											"protein" : data["hits"][j]["fields"]["nf_protein"],
 
-											"score" : ((1 / ((parseInt(data["hits"][j]["fields"]["nf_calories"]))/1)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/1000) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*10)))*100
+											
+
+											"score" : ((1 / ((parseInt(data["hits"][j]["fields"]["nf_calories"]))/CAL)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/LOW_PROTEIN) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*HIGH_FAT)))*100000
 
 										});
 										break;
@@ -119,9 +127,9 @@ $('#search').click(function() {
 
 							function compare(a,b) {
 									if (a["score"] < b["score"])
-     									return -1;
+     									return 1;
   									if (a["score"] > b["score"])
-   										return 1;
+   										return -1;
   									return 0;
 								
 							}
