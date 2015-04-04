@@ -23,34 +23,7 @@
     <script src="js/c3.min.js"></script>
     <script src="js/test.js"></script>
     
-    <script>
-        var chart = c3.generate({
-    data: {
-        columns: [
-            ['Cost', 30, 200, 100, 400, 150, 250],
-            ['Calories', 130, 100, 140, 200, 150, 50]
-        ],
-        type: 'bar',
-        colors:{
-            Cost: '#5cb85c',
-            Calories: '#000000'
-        },
-    },
-    bar: {
-        width: {
-            ratio: 0.5 // this makes bar width 50% of length between ticks
-        }
-        // or
-        //width: 100 // this makes bar width 100px
-    },
-    axis: {
-        x: {
-            type: 'category',
-            categories: ['burger', 'fries', 'cat', 'hat', 'dog', 'meow']
-        }
-    }
-});
-    </script>
+    
 
     <!-- Custom CSS -->
     <style>
@@ -241,6 +214,35 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/app.js"></script>
+    
+    <script>
+        var chart = c3.generate({
+    data: {
+        columns: [
+            ['Cost', 30, 200, 100, 400, 150, 250],
+            ['Calories', 130, 100, 140, 200, 150, 50]
+        ],
+        type: 'bar',
+        colors:{
+            Cost: '#5cb85c',
+            Calories: '#000000'
+        },
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: ['burger', 'fries', 'cat', 'hat', 'dog', 'meow']
+        }
+    }
+});
+    </script>
 
 </body>
 
