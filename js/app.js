@@ -46,7 +46,9 @@ $('#search').click(function() {
 				console.log(location.toLowerCase().replace(/\s/g,''));
 				console.log((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')));
 
-				if((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')).contains(location.toLowerCase().replace(/\s/g,''))){
+				if((response["venues"][i]["name"].toLowerCase().replace(/\s/g,''))
+					.indexOf(location.toLowerCase().replace(/\s/g,'')) > -1){
+					
 					console.log(location.toLowerCase().replace(/\s/g,''));
 					id = response["venues"][i]["id"];
 					break;
