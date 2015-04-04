@@ -9,11 +9,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Food For Less</title>
+    <title>Food4Less</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    
+    <!-- Load c3.css -->
+    <link href="css/c3.css" rel="stylesheet" type="text/css">
+
+    <!-- Load d3.js and c3.js -->
+    <script src="js/d3.min.js" charset="utf-8"></script>
+    <script src="js/c3.min.js"></script>
+    <script src="js/test.js"></script>
+    
+    
 
     <!-- Custom CSS -->
     <style>
@@ -34,6 +44,35 @@
         font-style: normal;
 
     }
+        
+    @font-face {
+        font-family: 'walkway_boldregular';
+        src: url('Walkway Bold-webfont.eot');
+        src: url('Walkway Bold-webfont.eot?#iefix') format('embedded-opentype'),
+             url('Walkway Bold-webfont.woff2') format('woff2'),
+             url('Walkway Bold-webfont.woff') format('woff'),
+             url('Walkway Bold-webfont.ttf') format('truetype'),
+             url('Walkway Bold-webfont.svg#walkway_boldregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+
+
+
+    @font-face {
+        font-family: 'typo_groteskregular';
+        src: url('fonts/Typo Grotesk Demo-webfont.eot');
+        src: url('fonts/Typo Grotesk Demo-webfont.eot?#iefix') format('embedded-opentype'),
+             url('fonts/Typo Grotesk Demo-webfont.woff2') format('woff2'),
+             url('fonts/Typo Grotesk Demo-webfont.woff') format('woff'),
+             url('fonts/Typo Grotesk Demo-webfont.ttf') format('truetype'),
+             url('fonts/Typo Grotesk Demo-webfont.svg#typo_groteskregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+
+    }
 
     #font{
         padding-top: 16px;
@@ -41,9 +80,35 @@
         font-family: 'caviar_dreamsbold';
     }
         
-    #spacer{
-        height: 50px;
+    .form-group{
+        position:relative;
     }
+        
+    #sidenote{
+        display: block;
+        margin-top: 5px;
+        color: darkgray;
+        font-style: italic;
+        font-size: 12px;
+        
+    }
+        
+    label{
+        padding-right: 7px;
+        margin-bottom: -20px;
+        font-size: 25px;
+        font-family: 'typo_groteskregular';
+        letter-spacing: -1px;
+    }
+        
+    td, th{
+        font-family: 'typo_groteskregular';
+    }
+        
+    #chart{
+        font-family: 'typo_groteskregular';
+    }
+
         
     </style>
 
@@ -64,7 +129,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a href="#" class="navbar-brand"><img src="img/white-icon.png"></a>
-                <a href="#" class="navbar-brand" id = "font">Food 4 Less</a>
+                <a href="#" class="navbar-brand" id = "font">Food4Less</a>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -75,21 +140,45 @@
     <div class="container">
 
         <div class="alert alert-danger" role="alert"> <b> Oh snap! </b> That location is not close by! </div>
-        
-        <div id = "spacer"></div>
 
         <div class="row">
-            <div class="col-lg-12 text-center pagination-centered">
-                <div class="input-group input-group-lg col-center">
-                    <input id = "searchbox" type="text" class="form-control text-center" placeholder="restaurant name" aria-describedby="sizing-addon1">
-                </div>
-            </div>
+            <center>
+                <form class="form-inline" role="form">
+                    <div class="form-group" id = "restaurant">
+                        <label>I want to eat at  </label>
+                        <input type="text" class="form-control text-center" placeholder="restaurant" id = "restaurant-input">
+                    </div>
+                    <div class="form-group" id = "money">
+                        <label>  I do not want to spend more than $</label>
+                        <input type="text" class="form-control text-center" placeholder="dollars*" id = "money-input">
+                    </div>
+                    <div class="form-group" id = "calories">
+                        <label>  I want to consume a  </label>
+                        <input type="text" class="form-control text-center" placeholder="low/medium/high*" id = "calories-input">
+                        <label for="pwd"> amount of calories</label>
+                    </div>
+                    <div class="form-group" id = "protein">
+                        <label>  I want to consume a  </label>
+                        <input type="text" class="form-control text-center" placeholder="low/medium/high*" id = "protein-input">
+                        <label for="pwd"> amount of protein</label>
+                    </div>
+                    <div class="form-group" id = "fat">
+                        <label>  I want to consume a  </label>
+                        <input type="text" class="form-control text-center" placeholder="low/medium/high*" id = "fat-input">
+                        <label for="pwd"> amount of fat</label>
+                    </div>
+                </form>
+            </center>
         </div>
 
         <div class="row col-center">
 
             <div  class="text-center">
                 <button id = "search" type="button" class="btn btn-success">search</button>
+                <button id = "next" type="button" class="btn btn-success">next</button>
+                <button id = "again" type="button" class="btn btn-success">reset</button>
+                <button id = "again" type="button" class="btn btn-success">save</button>
+                <label id = "sidenote">*optional</label>
 
             </div>
 
@@ -118,6 +207,7 @@
 
         </div>
         <!-- /.row -->
+        <div id="chart"></div>
 
     </div>
     <!-- /.container -->
@@ -129,6 +219,35 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/app.js"></script>
+    
+    <script>
+        var chart = c3.generate({
+    data: {
+        columns: [
+            ['Cost', 30, 200, 100, 400, 150, 250],
+            ['Calories', 130, 100, 140, 200, 150, 50]
+        ],
+        type: 'bar',
+        colors:{
+            Cost: '#5cb85c',
+            Calories: '#000000'
+        },
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: ['burger', 'fries', 'cat', 'hat', 'dog', 'meow']
+        }
+    }
+});
+    </script>
 
 </body>
 
