@@ -9,10 +9,6 @@ $("#searchbox").keyup(function(event){
         $("#search").click();
     }
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> sujay-test
 
 $('#search').click(function() {
 
