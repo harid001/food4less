@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 $('.form-control').keyup(function(event){
     if(event.keyCode == 13){
-        if(click < 4){
+        if(click < 2){
         $('#next').click();
         }
         else{
@@ -28,20 +28,24 @@ $('#next').click(function() {
     switch(click){
             case 1:
                 var location = $('#restaurant-input').val();
+                
                 console.log(click);
                 if(location == '' ){
                     click--;
                     console.log(click);
                 } else{
                     $('#restaurant').fadeOut('slow');
+                    
                     $('#money').delay("slow").fadeIn('slow'); 
                     $('#sidenote').delay("slow").fadeIn('slow'); 
                 }
                 break;
             case 2:
                 var cost = $('#money-input').val();
+                
                 $('#money').fadeOut('slow'); 
                 $('#next').fadeOut("slow");
+                
                 $('#calories').delay("slow").fadeIn('slow');               
                 $('#search').delay("slow").fadeIn("slow");                
                 break;
@@ -56,17 +60,19 @@ $('#again').click(function() {
     $('#restaurant').delay("slow").fadeIn("slow");
     $('#next').delay("slow").fadeIn("slow");
     //reset inputs
-    $('#restaurant-input').val() = "";
-    $('#money-input').val() = "";
-    $('#calories-input').val() = "";
+    $('#calories-input').val("");
+    $('#money-input').val("");
+    $('#restaurant-input').val("");
 });
 
 $('#search').click(function() {
     
     var calories = $('#calories-input').val();
-                $('#calories').fadeOut('slow'); 
+    
+    $('#calories').fadeOut('slow'); 
     $('#search').fadeOut('slow');
     $('#sidenote').fadeOut("slow");
+    
     // fade in restaurant name
     $('#again').delay("slow").fadeIn("slow");
     
