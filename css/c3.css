@@ -1,6 +1,9 @@
 /*-- Chart --*/
 .c3 svg {
-  font: 10px sans-serif; }
+  font-size: 10px;
+    font-family: 'typo_groteskregular';
+
+}
 
 .c3 path, .c3 line {
   fill: none;
