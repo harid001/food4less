@@ -45,8 +45,6 @@ $('#search').click(function() {
 			var id = '';
 			for( var i = 0; i < response["venues"].length; i++){
 
-				console.log(location.toLowerCase().replace(/[^a-z0-9]+/g,''));
-				console.log((response["venues"][i]["name"].toLowerCase().replace(/[^a-z0-9]+/g,'')));
 
 				if((response["venues"][i]["name"].toLowerCase().replace(/[^a-z0-9]+/g,''))
 					.indexOf(location.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
@@ -85,7 +83,7 @@ $('#search').click(function() {
 						var q = 'https://api.nutritionix.com/v1_1/search/' 
 								+ location 
 								+ '?results=0%3A50&fields='
-								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat'
+								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
 								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
 
 						var dataObj = {};
@@ -94,13 +92,14 @@ $('#search').click(function() {
 						$.get(q,function(data){
 							for(var i = 0; i < food.length; i++){
 								for(var j = 0; j < data["hits"].length; j++){
-									console.log('food: ' + food[i].toLowerCase().replace(/\s/g,''));
-									console.log('other food: ' + data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/\s/g,''));
-									if(food[i].toLowerCase().replace(/\s/g,'').indexOf(data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/\s/g,'')) > -1){
+									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
+									var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
+									if(of.indexOf(f) > -1){
 										dataObj[food[i]] = {
-											"calories" : data["hits"][j]["nf_calories"],
-											"fat" : data["hits"][j]["nf_total_fat"],
-											"protein" : data["hits"][j]["nf_protein"]
+											"calories" : data["hits"][j]["fields"]["nf_calories"],
+											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
+											"protein" : data["hits"][j]["fields"]["nf_protein"]
+
 										};
 										break;
 									} 
