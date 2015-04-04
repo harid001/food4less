@@ -124,6 +124,16 @@ $('#search').click(function() {
 								}	
 							}
 							
+							var calUI = 300;
+							
+							var sum = 0;
+							for (var i = 0; i < dataObj.length; i++){
+								sum += dataObj[i]["calories"];
+							}
+
+							calUI = sum/dataObj.length;
+							
+							
 
 							function compare(a,b) {
 									if (a["score"] < b["score"])
@@ -136,7 +146,7 @@ $('#search').click(function() {
 
 							//dataObj.sort(compareCal);
 							
-							var calUI = 300;
+							
 
 							console.log(dataObj);
 
@@ -178,7 +188,7 @@ $('#search').click(function() {
 								}
 
 								console.log(ans);
-								
+
 							} else {
 								console.log(dataObj2);
 							}
