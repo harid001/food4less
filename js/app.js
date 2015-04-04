@@ -56,6 +56,9 @@ $('#again').click(function() {
     $('#restaurant').delay("slow").fadeIn("slow");
     $('#next').delay("slow").fadeIn("slow");
     //reset inputs
+    $('#restaurant-input').val() = "";
+    $('#money-input').val() = "";
+    $('#calories-input').val() = "";
 });
 
 $('#search').click(function() {
