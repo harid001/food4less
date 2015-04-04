@@ -51,9 +51,13 @@ $('#search').click(function() {
 						var menu = data["response"]["menu"]["menus"]["items"][0]["entries"]["items"];
 						for(var i = 0; i < menu.length; i++){
 							for(var j = 0; j < menu[i]["entries"]["items"].length; j++){
+								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
+								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
+								$('#menu-table tbody').append(nextRow);
 								console.log(menu[i]["entries"]["items"][j]["name"]);
 							}
 						}
+
 					}); 
 
 			}
