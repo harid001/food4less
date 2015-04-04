@@ -60,6 +60,9 @@ $('#search').click(function() {
 				$('.alert').show();
 			}
 			else{
+
+				response["venues"][i]["name"] = $("#searchbox").val();
+
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
 
