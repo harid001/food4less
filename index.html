@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>foody</title>
+    <title>food</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -69,6 +69,7 @@
         <script>
 
            var a = [32,32,43,42,34,43,54,65,75,53,65,53,24,43,64,75,75,40];
+           var b = [3,2,4,4,3,4,5,6,7,5,6,3,2,4,6,7,5,1];
 
             function maxCal(list, inp){
                 list.sort();
@@ -86,15 +87,26 @@
             }
 
             function maxDollars(list, inp){
-                
+                 list.sort();
+                var ans = [];
+
+                var count = 0;
+                for (var i = 0; i < list.length; i++){
+                    if (list[i]<=inp){
+                        ans[count] = list[i];
+                        count++;
+                    }
+                }
+
+                document.write(ans);
                 
             }
 
-            document.write(maxCal(a, 40));
+            maxCal(a, 40);
+            document.write("<br>");
+            maxDollars(b, 5);
 
             
-            
-
         </script>
 
     <!-- Page Content -->
