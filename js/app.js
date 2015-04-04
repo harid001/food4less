@@ -2,11 +2,13 @@ $(document).ready(function(){
 
 	$('.alert').hide();
 
-
-
 });
 
-
+$("#searchbox").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#search").click();
+    }
+});
 
 $('#search').click(function() {
 
