@@ -65,6 +65,38 @@
         <!-- /.container -->
     </nav>
 
+
+        <script>
+
+           var a = [32,32,43,42,34,43,54,65,75,53,65,53,24,43,64,75,75,40];
+
+            function maxCal(list, inp){
+                list.sort();
+                var ans = [];
+
+                var count = 0;
+                for (var i = 0; i < list.length; i++){
+                    if (list[i]<=inp){
+                        ans[count] = list[i];
+                        count++;
+                    }
+                }
+
+                document.write(ans);
+            }
+
+            function maxDollars(list, inp){
+                
+                
+            }
+
+            document.write(maxCal(a, 40));
+
+            
+            
+
+        </script>
+
     <!-- Page Content -->
     <div class="container">
 
