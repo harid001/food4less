@@ -116,7 +116,7 @@ $('#search').click(function() {
 
 											
 
-											"score" : ((1 / ((parseInt(data["hits"][j]["fields"]["nf_calories"]))/CAL)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/LOW_PROTEIN) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*HIGH_FAT)))*100000
+											"score" : ((1 / (((parseInt(data["hits"][j]["fields"]["nf_calories"]))+1)/CAL)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/LOW_PROTEIN) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*HIGH_FAT)))*10000000
 
 										});
 										break;
@@ -132,8 +132,7 @@ $('#search').click(function() {
    										return -1;
   									return 0;
 								
-							}
-
+							}						
 
 							dataObj.sort(compare);
 							
@@ -147,6 +146,12 @@ $('#search').click(function() {
 									delete dataObj[i];
 							}
 
+							function combinations(){
+								for (var i = 0 ; i < dataObj.length; i++){
+									
+								} 
+
+							}
 							
 
 							console.log(dataObj);
