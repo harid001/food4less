@@ -15,6 +15,10 @@ img {
     height: auto;
 }
 
+#searchbox {
+  border:2px solid green;
+}
+
 .navbar-default {
   background-color: #5cb85c;
   border-color: #307c30;
