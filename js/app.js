@@ -42,7 +42,7 @@ $('#search').click(function() {
 			var response = data["response"];
 			var id = '';
 			for( var i = 0; i < response["venues"].length; i++){
-				if(response["venues"][i]["name"] === location){
+				if(response["venues"][i]["name"].toLowerCase().replace(/WD/,'') === location.toLowerCase().replace(/WD/,'')){
 					id = response["venues"][i]["id"];
 					break;
 				}
