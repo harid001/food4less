@@ -64,6 +64,7 @@ $('#search').click(function() {
 			else{
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
+				var food = [];
 
 				$.get('https://api.foursquare.com/v2/venues/' + id + '/menu?' + 'client_id=' + clientId
 					+ '&client_secret=' + clientSecret + '&v=20140806&m=foursquare',
@@ -71,12 +72,42 @@ $('#search').click(function() {
 						var menu = data["response"]["menu"]["menus"]["items"][0]["entries"]["items"];
 						for(var i = 0; i < menu.length; i++){
 							for(var j = 0; j < menu[i]["entries"]["items"].length; j++){
+
+								
+								food.push(menu[i]["entries"]["items"][j]["name"]);
+								
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
-								$('#menu-table tbody').append(nextRow);
-								// console.log(menu[i]["entries"]["items"][j]["name"]);
+								$('#menu-table tbody').append(nextRow);								
+
 							}
 						}
+						var q = 'https://api.nutritionix.com/v1_1/search/' 
+								+ location 
+								+ '?results=0%3A50&fields='
+								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat'
+								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
+
+						var dataObj = {};
+
+
+						$.get(q,function(data){
+							for(var i = 0; i < food.length; i++){
+								for(var j = 0; j < data["hits"].length; j++){
+									console.log('food: ' + food[i].toLowerCase().replace(/\s/g,''));
+									console.log('other food: ' + data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/\s/g,''));
+									if(food[i].toLowerCase().replace(/\s/g,'').indexOf(data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/\s/g,'')) > -1){
+										dataObj[food[i]] = {
+											"calories" : data["hits"][j]["nf_calories"],
+											"fat" : data["hits"][j]["nf_total_fat"],
+											"protein" : data["hits"][j]["nf_protein"]
+										};
+										break;
+									} 
+								}	
+							}
+							console.log(dataObj);
+						});
 
 					});
 
