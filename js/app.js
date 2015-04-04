@@ -93,7 +93,7 @@ $('#search').click(function() {
 								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
 								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
 
-						var dataObj = {};
+						var dataObj = [];
 
 
 						$.get(q,function(data){
@@ -102,17 +102,33 @@ $('#search').click(function() {
 									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
 									var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
 									if(of.indexOf(f) > -1){
-										dataObj[food[i]] = {
+										dataObj.push( {
+											"food" : food[i],
 											"calories" : data["hits"][j]["fields"]["nf_calories"],
 											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
-											"protein" : data["hits"][j]["fields"]["nf_protein"]
+											"protein" : data["hits"][j]["fields"]["nf_protein"],
+											"score" : ((1 / ((parseInt(data["hits"][j]["fields"]["nf_calories"]))/10)) * (parseInt(data["hits"][j]["fields"]["nf_protein"])/100) * (1/(parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)))*100
 
-										};
+										});
 										break;
 									} 
 								}	
 							}
 							console.log(dataObj);
+
+							function compare(a,b) {
+									if (a["score"] < b["score"])
+     									return -1;
+  									if (a["score"] > b["score"])
+   										return 1;
+  									return 0;
+								
+							}
+
+
+							dataObj.sort(compare);
+							console.log(dataObj);
+							console.log(dataObj["score"]);
 						});
 
 					});
