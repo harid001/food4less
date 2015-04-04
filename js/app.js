@@ -43,11 +43,11 @@ $('#search').click(function() {
 			var id = '';
 			for( var i = 0; i < response["venues"].length; i++){
 
-				// console.log(location.toLowerCase().replace(/\s/g,''));
-				// console.log((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')));
+				console.log(location.toLowerCase().replace(/[^a-z0-9]+/g,''));
+				console.log((response["venues"][i]["name"].toLowerCase().replace(/[^a-z0-9]+/g,'')));
 
-				if((response["venues"][i]["name"].toLowerCase().replace(/\s/g,''))
-					.indexOf(location.toLowerCase().replace(/\s/g,'')) > -1){
+				if((response["venues"][i]["name"].toLowerCase().replace(/[^a-z0-9]+/g,''))
+					.indexOf(location.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
 					
 					// console.log(location.toLowerCase().replace(/\s/g,''));
 					id = response["venues"][i]["id"];
