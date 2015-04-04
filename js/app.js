@@ -2,10 +2,13 @@ $(document).ready(function(){
 
 	$('.alert').hide();
 
-
-
 });
 
+$("#searchbox").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#search").click();
+    }
+});
 
 
 $('#search').click(function() {
@@ -61,7 +64,10 @@ $('#search').click(function() {
 			}
 			else{
 
-				response["venues"][i]["name"] = $("#searchbox").val();
+				$('.alert').hide();
+
+				$('#searchbox').val(response["venues"][i]["name"]);
+
 
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
