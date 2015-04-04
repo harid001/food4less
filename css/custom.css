@@ -5,6 +5,16 @@
 	margin-top: 20px;
 }
 
+.table{
+	margin-top:40px;
+}
+
+img {
+    margin-top: -14px;
+    width:45px;
+    height: auto;
+}
+
 .navbar-default {
   background-color: #5cb85c;
   border-color: #307c30;
