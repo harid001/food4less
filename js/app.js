@@ -1,87 +1,18 @@
-var click = 0;
-
 $(document).ready(function(){
 
 	$('.alert').hide();
-	// $('#menu-table').empty();
 
-    $('#money').hide();
-    $('#calories').hide();
-    $('#protein').hide();
-    $('#fat').hide();
-    $('#search').hide();
-    $('#sidenote').hide();
-    $('#again').hide();
 });
-$('.alert').hide();
 
-$('.form-control').keyup(function(event){
+$("#searchbox").keyup(function(event){
     if(event.keyCode == 13){
-        if(click < 2){
-        $('#next').click();
-        }
-        else{
-            $('#search').click();
-        }
+        $("#search").click();
     }
-});
-
-$('#next').click(function() {
-    click++;
-    switch(click){
-            case 1:
-                var location = $('#restaurant-input').val();
-                
-                console.log(click);
-                if(location == '' ){
-                    click--;
-                    console.log(click);
-                } else{
-                    $('#restaurant').fadeOut('slow');
-                    
-                    $('#money').delay("slow").fadeIn('slow'); 
-                    $('#sidenote').delay("slow").fadeIn('slow'); 
-                }
-                break;
-            case 2:
-                var cost = $('#money-input').val();
-                
-                $('#money').fadeOut('slow'); 
-                $('#next').fadeOut("slow");
-                
-                $('#calories').delay("slow").fadeIn('slow');               
-                $('#search').delay("slow").fadeIn("slow");                
-                break;
-    }
-});
-
-$('#again').click(function() {
-    click = 0;
-    //reset chart
-    //reset variables
-    $('#again').fadeOut("slow");
-    $('#restaurant').delay("slow").fadeIn("slow");
-    $('#next').delay("slow").fadeIn("slow");
-    //reset inputs
-    $('#calories-input').val("");
-    $('#money-input').val("");
-    $('#restaurant-input').val("");
 });
 
 $('#search').click(function() {
-    
-    var calories = $('#calories-input').val();
-    
-    $('#calories').fadeOut('slow'); 
-    $('#search').fadeOut('slow');
-    $('#sidenote').fadeOut("slow");
-    
-    // fade in restaurant name
-    $('#again').delay("slow").fadeIn("slow");
-    
-            
-    
-	
+
+	var location = $("#searchbox").val();
 
 
 	// if (navigator.geolocation) {
@@ -110,44 +41,31 @@ $('#search').click(function() {
 		+ '&v=' + query['version'] 
 		+ '&m=' + query['m'],
 		function(data) { 
-			var response = data['response'];
+			var response = data["response"];
 			var id = '';
-			for( var i = 0; i < response['venues'].length; i++){
+			for( var i = 0; i < response["venues"].length; i++){
 
 
-				if((response['venues'][i]['name'].toLowerCase().replace(/[^a-z0-9]+/g,''))
+				if((response["venues"][i]["name"].toLowerCase().replace(/[^a-z0-9]+/g,''))
 					.indexOf(location.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
 					
 					// console.log(location.toLowerCase().replace(/\s/g,''));
-					id = response['venues'][i]['id'];
+					id = response["venues"][i]["id"];
 					// console.log(id);
 					break;
 				}
 			}
 			if(id.length === 0){
-				console.log('unable to find restaurant near location');
+				console.log("unable to find restaurant near location");
 				$('.alert').show();
 			}
 			else{
 
-				$('#menu-table').empty();
-
-
-				
-
-
-
-				// var table_header = '<th>'+"Item"+'</th><th>'+"Cost"+'</th>';
-				// console.log("before table");
-				// $('#menu-table thead').append(table_header);
-				// console.log("thead built");
-				// console.log($('#menu-table').html());
-				createTHead();
-				$('menu-table').show();
+				$('#menu-table tbody').empty();
 
 				$('.alert').hide();
 
-				$('#searchbox').val(response['venues'][i]['name']);
+				$('#searchbox').val(response["venues"][i]["name"]);
 
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
@@ -156,21 +74,15 @@ $('#search').click(function() {
 				$.get('https://api.foursquare.com/v2/venues/' + id + '/menu?' + 'client_id=' + clientId
 					+ '&client_secret=' + clientSecret + '&v=20140806&m=foursquare',
 					function (data) {
-						var menu = data['response']['menu']['menus']['items'][0]['entries']['items'];
+						var menu = data["response"]["menu"]["menus"]["items"][0]["entries"]["items"];
 						for(var i = 0; i < menu.length; i++){
-							for(var j = 0; j < menu[i]['entries']['items'].length; j++){
+							for(var j = 0; j < menu[i]["entries"]["items"].length; j++){
 
 								
-								food.push(menu[i]['entries']['items'][j]['name']);
+								food.push(menu[i]["entries"]["items"][j]["name"]);
 								
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
-								// console.log(nextRow);
-								$('#menu-table').append(nextRow);	
-								// console.log($('#menu-table tbody').html());
-								// console.log($('#menu-table').html());						
-								var nextRow = '<tr><td>' + menu[i]['entries']['items'][j]['name'] + '</td>'
-								+ '<td>' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
 								$('#menu-table tbody').append(nextRow);								
 
 							}
@@ -186,14 +98,14 @@ $('#search').click(function() {
 
 						$.get(q,function(data){
 							for(var i = 0; i < food.length; i++){
-								for(var j = 0; j < data['hits'].length; j++){
+								for(var j = 0; j < data["hits"].length; j++){
 									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
-									var of = data['hits'][j]['fields']['item_name'].toLowerCase().replace(/[^a-z0-9]+/g,'');
+									var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
 									if(of.indexOf(f) > -1){
 										dataObj[food[i]] = {
-											'calories' : data['hits'][j]['fields']['nf_calories'],
-											'fat' : data['hits'][j]['fields']['nf_total_fat'],
-											'protein' : data['hits'][j]['fields']['nf_protein']
+											"calories" : data["hits"][j]["fields"]["nf_calories"],
+											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
+											"protein" : data["hits"][j]["fields"]["nf_protein"]
 
 										};
 										break;
@@ -211,18 +123,5 @@ $('#search').click(function() {
 
 
 		});
-
-function createTHead() {
-        var x = document.getElementById("menu-table");
-        // if (!x.tHead) {
-            var header = x.createTHead();
-            var row = header.insertRow(0);
-            var cell0 = row.insertCell(0);
-            cell0.innerHTML = "Item";
-            var cell1 = row.insertCell(1);
-            cell1.innerHTML = "Cost";
-        // }
-    }
-
 
 });
