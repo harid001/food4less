@@ -3,10 +3,8 @@ var click = 0;
 $(document).ready(function(){
 
 	$('.alert').hide();
-<<<<<<< HEAD
 	// $('#menu-table').empty();
 
-=======
     $('#money').hide();
     $('#calories').hide();
     $('#protein').hide();
@@ -14,7 +12,6 @@ $(document).ready(function(){
     $('#search').hide();
     $('#sidenote').hide();
     $('#again').hide();
->>>>>>> trevor-format
 });
 $('.alert').hide();
 
@@ -166,18 +163,15 @@ $('#search').click(function() {
 								
 								food.push(menu[i]['entries']['items'][j]['name']);
 								
-<<<<<<< HEAD
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
 								// console.log(nextRow);
 								$('#menu-table').append(nextRow);	
 								// console.log($('#menu-table tbody').html());
-								// console.log($('#menu-table').html());							
-=======
+								// console.log($('#menu-table').html());						
 								var nextRow = '<tr><td>' + menu[i]['entries']['items'][j]['name'] + '</td>'
 								+ '<td>' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
 								$('#menu-table tbody').append(nextRow);								
->>>>>>> trevor-format
 
 							}
 						}
@@ -217,7 +211,6 @@ $('#search').click(function() {
 
 
 		});
-<<<<<<< HEAD
 
 function createTHead() {
         var x = document.getElementById("menu-table");
@@ -232,6 +225,4 @@ function createTHead() {
     }
 
 
-=======
->>>>>>> trevor-format
 });
