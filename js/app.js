@@ -43,14 +43,15 @@ $('#search').click(function() {
 			var id = '';
 			for( var i = 0; i < response["venues"].length; i++){
 
-				console.log(location.toLowerCase().replace(/\s/g,''));
-				console.log((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')));
+				// console.log(location.toLowerCase().replace(/\s/g,''));
+				// console.log((response["venues"][i]["name"].toLowerCase().replace(/\s/g,'')));
 
 				if((response["venues"][i]["name"].toLowerCase().replace(/\s/g,''))
 					.indexOf(location.toLowerCase().replace(/\s/g,'')) > -1){
 					
-					console.log(location.toLowerCase().replace(/\s/g,''));
+					// console.log(location.toLowerCase().replace(/\s/g,''));
 					id = response["venues"][i]["id"];
+					// console.log(id);
 					break;
 				}
 			}
@@ -71,7 +72,7 @@ $('#search').click(function() {
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
 								$('#menu-table tbody').append(nextRow);
-								console.log(menu[i]["entries"]["items"][j]["name"]);
+								// console.log(menu[i]["entries"]["items"][j]["name"]);
 							}
 						}
 
