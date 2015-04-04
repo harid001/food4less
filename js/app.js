@@ -1,12 +1,11 @@
 var click = 0;
+var tname;
 
 $(document).ready(function(){
 
 	$('.alert').hide();
     $('#money').hide();
     $('#calories').hide();
-    $('#protein').hide();
-    $('#fat').hide();
     $('#search').hide();
     $('#sidenote').hide();
     $('#again').hide();
@@ -15,7 +14,7 @@ $(document).ready(function(){
 $('.form-control').keyup(function(event){
     if(event.keyCode == 13){
         if(click < 2){
-        $('#next').click();
+            $('#next').click();
         }
         else{
             $('#search').click();
@@ -27,10 +26,9 @@ $('#next').click(function() {
     click++;
     switch(click){
             case 1:
-                var location = $('#restaurant-input').val();
-                
+                tname = $('#restaurant-input').val();
                 console.log(click);
-                if(location == '' ){
+                if(tname == '' ){
                     click--;
                     console.log(click);
                 } else{
@@ -113,9 +111,9 @@ $('#search').click(function() {
 
 
 				if((response['venues'][i]['name'].toLowerCase().replace(/[^a-z0-9]+/g,''))
-					.indexOf(location.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
+					.indexOf(tname.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
 					
-					// console.log(location.toLowerCase().replace(/\s/g,''));
+					// console.log(tname.toLowerCase().replace(/\s/g,''));
 					id = response['venues'][i]['id'];
 					// console.log(id);
 					break;
@@ -154,7 +152,7 @@ $('#search').click(function() {
 							}
 						}
 						var q = 'https://api.nutritionix.com/v1_1/search/' 
-								+ location 
+								+ tname 
 								+ '?results=0%3A50&fields='
 								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
 								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
