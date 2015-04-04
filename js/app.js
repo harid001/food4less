@@ -139,6 +139,7 @@ $('#search').click(function() {
 							var calUI = 300;
 
 							console.log(dataObj);
+
 							
 							// deletes objects with calories out of bounds	
 							for (var i = 0 ; i < dataObj.length; i++){
@@ -146,13 +147,40 @@ $('#search').click(function() {
 									delete dataObj[i];
 							}
 
+
+							var max = 0;
+							var m = [];
+
+
+							function compareCal(a,b) {
+									if (a["calories"] > b["calories"])
+     									return 1;
+  									if (a["calories"] < b["calories"])
+   										return -1;
+  									return 0;
+								
+							}
+
+							dataObj.sort(compareCal)
+
+							// debug this part, this method gives all of the possible combination for food items that have less than the maximum amount of calories.
 							function combinations(){
 								for (var i = 0 ; i < dataObj.length; i++){
-									
+
+									if (max < calUI){
+										max+=parseInt(dataObj[i]["calories"]); 
+										alert(parseInt(dataObj[i]["calories"]));
+										//m.push(i);
+									} else {
+										alert(dataObj);
+										delete dataObj[i];
+									}
+
 								} 
 
 							}
-							
+
+							dataObj.sort(compare);
 
 							console.log(dataObj);
 						});
