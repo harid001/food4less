@@ -1,3 +1,12 @@
+$(document).ready(function(){
+
+	$('.alert').hide();
+
+
+
+});
+
+
 
 $('#search').click(function() {
 
@@ -40,6 +49,7 @@ $('#search').click(function() {
 			}
 			if(id.length == 0){
 				console.log("unable to find restaurant near location");
+				$('.alert').show();
 			}
 			else{
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
