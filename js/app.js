@@ -1,5 +1,7 @@
 var click = 0;
 var tname;
+// calories, cost, fat, protein
+var nsi = { };
 
 $(document).ready(function(){
 
@@ -272,11 +274,17 @@ $('#search').click(function() {
 									var prot = ((dataObj[x]["protein"]+1)/LOW_PROTEIN);
 									var tfat = (1/((dataObj[x]["fat"]+1)*HIGH_FAT));
 									var prce = (1/((dataObj[x]["prices"]+.01)*PRICE));
+                                    
 
 									dataObj[x]["score"] = (calor * prot * tfat * prce)*10000000;
+                                    
+                                    
 									
 								}   
 							}
+                            
+                            
+                            
                             $(".price").each(function(index){
                                 $(this).text(prices[index]);
                             });
@@ -448,6 +456,28 @@ $('#search').click(function() {
 
 							} else {
 								console.log(dataObj2);
+                                
+                                for(var x = 0; x < dataObj2.length; x++){
+									// take out prices it screws up 
+								
+									
+									var calor = (1 / (((dataObj2[x]["calories"])+1)/CAL));
+									var prot = ((dataObj2[x]["protein"]+1)/LOW_PROTEIN);
+									var tfat = (1/((dataObj2[x]["fat"]+1)*HIGH_FAT));
+									var prce = (1.0/(parseInt((dataObj2[x]["prices"])+0.01)*PRICE));
+                                    
+                                    var added = calor + prot + tfat + prce;
+                                    
+                                    
+                                    nsi[dataObj2[x]["food"]] = [ ["calories", (calor/added)*100],
+                                            ["price", (prce/added)*100],
+                                            ["protein",  (prot/added)*100],
+                                            ["fat", (tfat/added)*100] ];
+								}
+                                
+                                
+                                
+                                
                                 var cost = ['Cost'];
                                 var calories = ['Calories'];
                                 var foodNames = [];    
@@ -471,7 +501,7 @@ $('#search').click(function() {
                                         type: 'bar',
                                         colors:{
                                             Cost: '#5cb85c',
-                                            Calories: '#000000'
+                                            Calories: '#000080'
                                         },
                                         axes: {
                                             Calories: 'y',
@@ -501,13 +531,12 @@ $('#search').click(function() {
                                     data: {
                                         
                                         columns: [
-                                            ['data1', 30],
-                                            ['data2', 120],
+                                            
                                         ],
                                         type : 'donut',
                                         },
                                         donut: {
-                                            title: "Iris Petal Width"
+                                            title : 'Relative Importance'
                                         }
                                 });
                                 
@@ -516,6 +545,8 @@ $('#search').click(function() {
                                 $(".modal-content").hide().fadeIn('fast');
                                 
                                 $('#chart').delay("slow").fadeIn("slow");
+                                
+                                console.log(nsi);
 
                                 
                                 for(var i = 0; i < 5; i++){
@@ -524,14 +555,23 @@ $('#search').click(function() {
                                         
                                         //data-toggle="modal" data-target=".bs-example-modal-sm"
                                         
-                                        var nextRow = '<tr><td>' + dataObj2[i]['food']+ '</td>'
-                                        + '<td class = "price" data-toggle="modal" data-target=".bs-example-modal-lg">' + dataObj2[i]['prices'] + '</td><td class = "price" data-toggle="modal" data-target=".bs-example-modal-lg">' + dataObj2[i]                                                ['calories']
-                                        + '</td><td class = "price" data-toggle="modal" data-target=".bs-example-modal-lg" >' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]                                             ['protein'] + '</td></tr>';
+                                        var nextRow = '<tr><td data-toggle="modal" data-target=".bs-example-modal-lg">' + dataObj2[i]['food']+ '</td>'
+                                        + '<td class = "price">' + dataObj2[i]['prices'] + '</td><td class = "price">' + dataObj2[i]                                                ['calories']
+                                        + '</td><td class = "price">' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]                                             ['protein'] + '</td></tr>';
                                         
                                         $('#final-table tbody').append(nextRow);
                                         
                                     } catch(err) {continue;}
                                 }
+                                
+                                $('#final-table tbody tr td').click(function(){
+                                    var text = $(this).text();
+                                    console.log(nsi[$(this).text()]);
+                                    test.load({
+                                       columns : nsi[$(this).text()]
+                                    
+                                    });
+                                });
                                 
                                 $('.element').delay("slow").fadeIn('slow');
                                 
@@ -544,7 +584,7 @@ $('#search').click(function() {
                                 $('#eat').delay('slow').fadeIn('slow');
                                 
                                 $('#eat').click(function(){
-                                    window.open('http://google.com/#q=' + $('#restaurant-input').text().replace('/s','+')); 
+                                    window.open('http://www.nutritionix.com/search?q=' + $('#restaurant-input').text()); 
                                     //#q=' + $('#restaurant-input').val();   
                                 });
                                 
