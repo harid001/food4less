@@ -17,6 +17,7 @@ $(document).ready(function(){
     $('.element').hide();
     $('#final-table').hide();
     $('#calories-input').hide();
+    $('#eat').hide();
     
 });
 
@@ -495,7 +496,7 @@ $('#search').click(function() {
                                     console.log(dataObj2[0]['food']);
                                     try{
                                         
-                                        var nextRow = '<tr><td class = "price">' + dataObj2[i]['food']+ '</td>'
+                                        var nextRow = '<tr><td>' + dataObj2[i]['food']+ '</td>'
                                         + '<td class = "price">' + dataObj2[i]['prices'] + '</td><td class = "price" >' + dataObj2[i]                                                ['calories']
                                         + '</td><td class = "price">' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]                                             ['protein'] + '</td></tr>';
                                         
@@ -512,6 +513,7 @@ $('#search').click(function() {
                                 
                                 $('#menu-table').delay('slow').fadeIn('slow');
                                 
+                                $('#eat').delay('slow').fadeIn('slow');
                                 
                                 
 							}
