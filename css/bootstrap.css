@@ -2603,7 +2603,9 @@ input[type="search"] {
   }
 }
 .form-group {
-  margin-bottom: 15px;
+    position:absolute;
+    padding-top: 20%;
+    margin-bottom: 20px;
 }
 .radio,
 .checkbox {
@@ -4967,6 +4969,9 @@ a.thumbnail.active {
   color: #66512c;
 }
 .alert-danger {
+    width: 70%;
+    left: 15%;
+    position: absolute;
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;

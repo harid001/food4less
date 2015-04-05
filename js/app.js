@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(document).ready(function(){
 
 	$('.alert').hide();
@@ -13,6 +14,104 @@ $("#searchbox").keyup(function(event){
 $('#search').click(function() {
 
 	var location = $("#searchbox").val();
+=======
+var click = 0;
+var tname;
+
+$(document).ready(function(){
+
+	$('.alert').hide();
+    $('#money').hide();
+    $('#calories').hide();
+    $('#sidenote').hide();
+    $('#search').hide();
+    $('#next').hide();
+    $('#again').hide();
+    $('#menu-table').hide();
+    $('#save').hide();
+    $('#chart').hide();
+});
+
+$('.form-control').keyup(function(event){
+    if(event.keyCode == 13){
+        if(click % 3 < 2){
+            $('#next').click();
+        }
+        else{
+            $('#search').click();
+        }
+    }
+});
+
+$('#next').click(function() {
+    click++;
+    switch(click){
+            case 1:
+                tname = $('#restaurant-input').val();
+                console.log(click);
+                if(tname == '' ){
+                    click--;
+                    console.log(click);
+                } else{
+                    $('#restaurant').fadeOut('slow');
+                    
+                    $('#money').delay("slow").fadeIn('slow'); 
+                    $('#sidenote').delay("slow").fadeIn('slow'); 
+                    $('#calories-input').val("");
+                }
+                break;
+            case 2:
+                var cost = $('#money-input').val();
+                if(cost == '' ){
+                    click--;
+                }
+                else{
+                    $('#money').fadeOut('slow'); 
+                    $('#next').fadeOut("slow");
+                    $('#calories').delay("slow").fadeIn('slow'); 
+                }
+                break;
+    }
+});
+
+$('#again').click(function() {
+    click = 0;
+    //reset chart
+    //reset variables
+    $('#restaurant').delay("slow").fadeIn("slow");
+    //reset inputs
+    $('#calories-input').val("");
+    $('#money-input').val("");
+    $('#restaurant-input').val("");
+});
+
+$('#search').click(function() {
+    
+    var calories = $('#calories-input').val();
+    if(calories == ''){
+    }
+    else{
+    $('#calories').fadeOut('slow'); 
+    $('#sidenote').fadeOut("slow");
+    
+    click = 0;
+    //reset chart
+    //reset variables
+
+    
+    $('#restaurant').delay("slow").fadeIn("slow");
+    
+    //reset inputs
+    
+    $('#money-input').val("");
+    $('#restaurant-input').val("");
+    // fade in restaurant name
+        
+    
+    
+    
+	
+>>>>>>> trevor-format
 
 
 	// if (navigator.geolocation) {
@@ -46,11 +145,19 @@ $('#search').click(function() {
 			for( var i = 0; i < response["venues"].length; i++){
 
 
+<<<<<<< HEAD
 				if((response["venues"][i]["name"].toLowerCase().replace(/[^a-z0-9]+/g,''))
 					.indexOf(location.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
 					
 					// console.log(location.toLowerCase().replace(/\s/g,''));
 					id = response["venues"][i]["id"];
+=======
+				if((response['venues'][i]['name'].toLowerCase().replace(/[^a-z0-9]+/g,''))
+					.indexOf(tname.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
+					
+					// console.log(tname.toLowerCase().replace(/\s/g,''));
+					id = response['venues'][i]['id'];
+>>>>>>> trevor-format
 					// console.log(id);
 					break;
 				}
@@ -60,7 +167,8 @@ $('#search').click(function() {
 				$('.alert').show();
 			}
 			else{
-
+                $('.form-group').delay("fast").animate({paddingTop: '0'},800, "linear");
+                $('#chart').delay("slow").fadeIn("slow");
 				$('#menu-table tbody').empty();
 
 				$('.alert').hide();
@@ -81,14 +189,22 @@ $('#search').click(function() {
 								
 								food.push(menu[i]["entries"]["items"][j]["name"]);
 								
+<<<<<<< HEAD
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
 								$('#menu-table tbody').append(nextRow);								
+=======
+								var nextRow = '<tr><td>' + menu[i]['entries']['items'][j]['name'] + '</td>'
+								+ '<td id = "price">' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
+								$('#menu-table tbody').append(nextRow);
+                                $('#menu-table').delay('show').fadeIn('slow');
+
+>>>>>>> trevor-format
 
 							}
 						}
 						var q = 'https://api.nutritionix.com/v1_1/search/' 
-								+ location 
+								+ tname 
 								+ '?results=0%3A50&fields='
 								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
 								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
@@ -123,5 +239,9 @@ $('#search').click(function() {
 
 
 		});
+<<<<<<< HEAD
 
+=======
+    }
+>>>>>>> trevor-format
 });
