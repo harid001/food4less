@@ -253,12 +253,12 @@ $('#search').click(function() {
                             
                             var alpha = $('#calories-input').val();
                             if(alpha.toLowerCase().replace(/[^a-z0-9]+/g,'') === 'high'){
-                               calUI +=     
+                               //calUI +=     
                             }
                             else if(alpha.toLowerCase().replace(/[^a-z0-9]+/g,'') === "medium"){
-                                calUI +=
+                                //calUI +=
                             }
-                            else if((alpha.toLowerCase().replace(/[^a-z0-9]+/g,'') === "low"){
+                            else if(alpha.toLowerCase().replace(/[^a-z0-9]+/g,'') === "low"){
                                     
                             } else {
                                     
