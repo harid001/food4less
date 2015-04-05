@@ -13,6 +13,7 @@ $(document).ready(function(){
     $('#menu-table').hide();
     $('#save').hide();
     $('#chart').hide();
+    $("input:text:visible:first").focus();
 });
 
 $('.form-control').keyup(function(event){
@@ -40,6 +41,7 @@ $('#next').click(function() {
                     $('#money').delay("slow").fadeIn('slow'); 
                     $('#sidenote').delay("slow").fadeIn('slow'); 
                     $('#calories-input').val("");
+                    $('#money').focus();
                 }
                 break;
             case 2:
@@ -50,7 +52,7 @@ $('#next').click(function() {
                 else{
                     $('#money').fadeOut('slow'); 
                     $('#next').fadeOut("slow");
-                    $('#calories').delay("slow").fadeIn('slow'); 
+                    $('#calories').delay("slow").fadeIn('slow');
                 }
                 break;
     }
