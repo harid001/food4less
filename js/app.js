@@ -14,6 +14,7 @@ $(document).ready(function(){
     $('#save').hide();
     $('#chart').hide();
     $("input:text:visible:first").focus();
+    $('.element').hide();
     
 });
 
@@ -33,7 +34,7 @@ $('#next').click(function() {
     switch(click){
             case 1:
                 tname = $('#restaurant-input').val();
-                $('#t1-caption').text("menu for " + tname);
+                
                
                 if(tname == '' ){
                     click--;
@@ -77,6 +78,7 @@ $('#search').click(function() {
     }
     else{
     $('#calories').fadeOut('slow'); 
+    $('#t1-caption').text("menu for " + tname);
     $('#sidenote').fadeOut("slow");
     
     click = 0;
@@ -470,9 +472,11 @@ $('#search').click(function() {
                                 
                                 $('#chart').delay("slow").fadeIn("slow");
                                 
-                                
-                                
                                 $('#menu-table').delay('show').fadeIn('slow');
+                                
+                                $('.element').show();
+                                
+                                go();
 							}
                             
 						});

@@ -22,6 +22,8 @@
     <script src="js/d3.min.js" charset="utf-8"></script>
     <script src="js/c3.min.js"></script>
     
+   
+    
     
 
     <!-- Custom CSS -->
@@ -30,6 +32,41 @@
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     } 
+        
+    .typed-cursor{
+        opacity: 1;
+        -webkit-animation: blink 0.7s infinite;
+        -moz-animation: blink 0.7s infinite;
+        animation: blink 0.7s infinite;
+        color:#5cb85c;
+        padding-top: 15px;
+        font-size: 30px;
+        font-family: 'geosanslightregular';
+        letter-spacing: -1px;
+    }
+    @keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    @-webkit-keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    @-moz-keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+        
+    .element{
+        color:#5cb85c;
+        padding-top: 15px;
+        font-size: 30px;
+        font-family: 'geosanslightregular';
+        letter-spacing: -1px;
+    }
 
     @font-face {
         font-family: 'caviar_dreamsbold';
@@ -170,8 +207,19 @@
 
         </div>
         
+        <div class="row">
+            <center>
+                <form class="form-inline" role="form">
+                    <div class="form-group" id = "restaurant">
+                        <span class = "element"><span class = "typed-cursor">|</span></span>
+                    </div>
+                </form>
+            </center>
+        </div>
+        
+        
+        
         <div id="chart" class = "taquino"></div>
-
         <div class="row">
             <center>
                 
@@ -205,11 +253,25 @@
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
+    
+   
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/app.js"></script>
+    
+      <!-- Load type.js -->
+    <script src="js/typed.js"></script>
+    
+    <script>
+      function go(){
+          $(".element").typed({
+            strings: ["We have found that the following"],
+            typeSpeed: 1
+          });
+      };
+    </script>
     
     <script>
         
