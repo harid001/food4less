@@ -15,6 +15,7 @@ $(document).ready(function(){
     $('#chart').hide();
     $("input:text:visible:first").focus();
     $('.element').hide();
+    $('#final-table').hide();
     
 });
 
@@ -79,6 +80,7 @@ $('#search').click(function() {
     else{
     $('#calories').fadeOut('slow'); 
     $('#t1-caption').text("menu for " + tname);
+    $('#t2-caption').text("nutrition score index");
     $('#sidenote').fadeOut("slow");
     
     click = 0;
@@ -107,9 +109,11 @@ $('#search').click(function() {
 //	 } else {
 //     	alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which             supports it.');
 //	 }
+        
+        //'37.3175,-122.0419'
 
 	var query = {
-		ll : '37.3175' + ',' + '-122.0419',
+		ll : '34.0722,-118.4441',
 		radius : '1000',
 		categoryId : '4d4b7105d754a06374d81259',
 		clientId : 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ',
@@ -472,7 +476,19 @@ $('#search').click(function() {
                                 
                                 $('#chart').delay("slow").fadeIn("slow");
                                 
-                                $('#menu-table').delay('show').fadeIn('slow');
+                                for(var i = 0; i < 5; i++){
+                                    try{
+                                    var nextRow = '<tr><td class = "price">' + dataObj2[i]['food']+ '</td>'
+								    + '<td class = "price">' + dataObj2[i]['prices'] + '</td><td class = "price" >' + dataObj2[i]       ['calories']
+                                    + '</td><td class = "price">' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]['protein'] + '</td></tr>';
+                                    $('#final-table tbody').append(nextRow);
+                                    } catch(err) {continue;}
+                                }
+                                
+                                                                
+                                $('#final-table').delay('slow').fadeIn('slow');
+                                
+                                $('#menu-table').delay('slow').fadeIn('slow');
                                 
                                 $('.element').show();
                                 
