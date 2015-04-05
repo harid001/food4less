@@ -9,22 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Food4Less</title>
+    <title>Food For Less</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-    
-    <!-- Load c3.css -->
-    <link href="css/c3.css" rel="stylesheet" type="text/css">
-
-    <!-- Load d3.js and c3.js -->
-    <script src="js/d3.min.js" charset="utf-8"></script>
-    <script src="js/c3.min.js"></script>
-    
-   
-    
-    
 
     <!-- Custom CSS -->
     <style>
@@ -32,56 +21,6 @@
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     } 
-        
-    #extra{
-        height = 40px;
-        width:100%;
-    }
-    
-    #eat{
-        width: 110px;
-        height: 90px;
-    }
-        
-    .typed-cursor{
-        opacity: 1;
-        -webkit-animation: blink 0.7s infinite;
-        -moz-animation: blink 0.7s infinite;
-        animation: blink 0.7s infinite;
-        color:#5cb85c;        
-        position: static;
-        margin-top: 50px;
-        padding-top: 50px;
-        padding-bottom: 10px;
-        font-size: 36px;
-        font-family: 'geosanslightregular';
-        letter-spacing: -1px;
-    }
-    @keyframes blink{
-        0% { opacity:1; }
-        50% { opacity:0; }
-        100% { opacity:1; }
-    }
-    @-webkit-keyframes blink{
-        0% { opacity:1; }
-        50% { opacity:0; }
-        100% { opacity:1; }
-    }
-    @-moz-keyframes blink{
-        0% { opacity:1; }
-        50% { opacity:0; }
-        100% { opacity:1; }
-    }
-        
-    .element{
-        color:#5cb85c;
-        margin-top: 50px;
-        padding-top: 50px;
-        padding-bottom: 10px;
-        font-size: 36px;
-        font-family: 'geosanslightregular';
-        letter-spacing: -1px;
-    }
 
     @font-face {
         font-family: 'caviar_dreamsbold';
@@ -95,78 +34,17 @@
         font-style: normal;
 
     }
-        
-    @font-face {
-        font-family: 'walkway_boldregular';
-        src: url('Walkway Bold-webfont.eot');
-        src: url('Walkway Bold-webfont.eot?#iefix') format('embedded-opentype'),
-             url('Walkway Bold-webfont.woff2') format('woff2'),
-             url('Walkway Bold-webfont.woff') format('woff'),
-             url('Walkway Bold-webfont.ttf') format('truetype'),
-             url('Walkway Bold-webfont.svg#walkway_boldregular') format('svg');
-        font-weight: normal;
-        font-style: normal;
-
-    }
-        
-    @font-face {
-        font-family: 'geosanslightregular';
-        src: url('fonts/GeosansLight-webfont.eot');
-        src: url('fonts/GeosansLight-webfont.eot?#iefix') format('embedded-opentype'),
-             url('fonts/GeosansLight-webfont.woff2') format('woff2'),
-             url('fonts/GeosansLight-webfont.woff') format('woff'),
-             url('fonts/GeosansLight-webfont.ttf') format('truetype'),
-             url('fonts/GeosansLight-webfont.svg#geosanslightregular') format('svg');
-        font-weight: normal;
-        font-style: normal;
-
-    }
 
     #font{
         padding-top: 16px;
-        font-size: 42px;
-        font-family: 'geosanslightregular';
+        font-size: 18px;
+        font-family: 'caviar_dreamsbold';
     }
         
-    .form-group{
-        position:relative;
+    #spacer{
+        height: 50px;
     }
         
-    #sidenote{
-        display: block;
-        margin-top: 5px;
-        color: darkgray;
-        font-style: italic;
-        font-size: 12px;
-        
-    }
-        
-    label{
-        color:#5cb85c;
-        position: static;
-        padding-right: 4px;
-        margin-bottom: -20px;
-        font-size: 25px;
-        font-family: 'geosanslightregular';
-        letter-spacing: -1px;
-    }
-        
-    td, th{
-        font-family: 'geosanslightregular';
-    } 
-        
-    .price{
-        letter-spacing: 3px;
-    }
-        
-    #money-input{
-        width: 90px;
-    }
-        
-    #button-holder{
-        width: 90px;
-        display: inline;
-    }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -186,7 +64,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a href="#" class="navbar-brand"><img src="img/white-icon.png"></a>
-                <a href="#" class="navbar-brand" id = "font">Food4Less</a>
+                <a href="#" class="navbar-brand" id = "font">Food 4 Less</a>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -196,101 +74,36 @@
     <!-- Page Content -->
     <div class="container">
 
-        <center><div class="alert alert-danger" role="alert"> <b> Oh snap! </b> That location is not close by! </div></center>
+        <div class="alert alert-danger" role="alert"> <b> Oh snap! </b> That location is not close by! </div>
+        
         <div id = "spacer"></div>
+
         <div class="row">
-            <center>
-                <form class="form-inline" role="form">
-                    <div class="form-group" id = "restaurant">
-                        <label>I want to eat at  </label>
-                        <input type="text" class="form-control text-center" placeholder="" id = "restaurant-input">
-                    </div>
-                    <div class="form-group" id = "money">
-                        <label>  I do not want to spend more than $</label>
-                        <input type="text" class="form-control text-center" placeholder="" id = "money-input">
-                    </div>
-                    <div class="form-group" id = "calories">
-                        <label>  I want to consume a  </label>
-                        <div id = "button-holder">
-                            <button type="button" class="btn btn-success" id = "low">low</button>
-                            <button type="button" class="btn btn-success" id = "medium">medium</button>
-                            <button type="button" class="btn btn-success" id = "high">high</button>
-                            <input type="text" class="form-control text-center" placeholder="" id = "calories-input">
-                        </div>
-                        <label for="pwd"> amount of calories</label>
-                    </div>
-                </form>
-            </center>
+            <div class="col-lg-12 text-center pagination-centered">
+                <div class="input-group input-group-lg col-center">
+                    <input id = "searchbox" type="text" class="form-control text-center" placeholder="restaurant name" aria-describedby="sizing-addon1">
+                </div>
+            </div>
         </div>
 
         <div class="row col-center">
 
             <div  class="text-center">
                 <button id = "search" type="button" class="btn btn-success">search</button>
-                <button id = "next" type="button" class="btn btn-success">next</button>
-                <button id = "again" type="button" class="btn btn-success">reset</button>
-                <button id = "save" type="button" class="btn btn-success">save</button>
 
             </div>
 
 
         </div>
-        
-        <center><div id="chart" class = "taquino" style = padding-bottom: 30px></div></center>
-        
-        <div class="row">
-            <center>
-                <form class="form-inline" role="form">
-                    <div class="form-group" id = "restaurant">
-                        <span class = "element"></span>
-                    </div>
-                </form>
-            </center>
-        </div>
-        
-        
-        
-        
-        <div class="row">
-            <center>
-                
-                
-                
-                <table id="final-table" class="table table-hover table-bordered">
-                    
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Cost</th>
-                            <th>Calories (cal)</th>
-                            <th>Fat (g)</th>
-                            <th>Protein (g)</th>
-                        </tr>
-                    
-                    
-                    </thead>
-                    
-                    <tbody>
-                        <tr></tr>
-                    </tbody>
-                </table>
-                
-                </table>
-                
 
-                <table id="menu-table" class="table table-bordered">
-                    
-                    <caption id="t1-caption"></caption>
-                    
+        <div class="row">
+            <center>
+
+                <table id="menu-table" class="table table-hover table-bordered">
                    <thead>
                         <tr>
-<<<<<<< HEAD
                             <!-- <th >Item</th>
                             <th >Cost</th> -->
-=======
-                            <th>Item</th>
-                            <th>Cost</th>
->>>>>>> trevor-format
                         </tr>
 
                    </thead>
@@ -305,43 +118,17 @@
 
         </div>
         <!-- /.row -->
-        
-    
-        <form action = "http://pizzamyheart.com"><center><button type="submit" class="btn btn-success" id = "eat">EAT!</button></center></form>
-        <div id = "extra"></div>
-        
 
     </div>
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
-    
-   
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/app.js"></script>
-    
-      <!-- Load type.js -->
-    <script src="js/typed.js"></script>
-    
-    <script>
-      function go(){
-          $(".element").typed({
-            strings: ["Feel free to enjoy any of the following:"],
-            typeSpeed: 1,
-            startDelay: 2000,
-          });
-      };
-    </script>
-    
-    <script>
-        
-       
-        
-    </script>
 
 </body>
 

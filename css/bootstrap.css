@@ -2238,7 +2238,7 @@ caption {
   text-align: left;
 }
 th {
-  text-align: center;
+  text-align: left;
 }
 .table {
   width: 100%;
@@ -2528,12 +2528,11 @@ output {
   color: #555;
 }
 .form-control {
-    font-family: 'geosanslightregular';
-  display: inline-block;
-  width: 250px;
+  display: block;
+  width: 100%;
   height: 34px;
   padding: 6px 12px;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -2547,7 +2546,7 @@ output {
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: rgb(92, 140, 92);
+  border-color: #66afe9;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(92, 184, 92, .6);
           box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(92, 184, 92, .6);
@@ -2604,9 +2603,7 @@ input[type="search"] {
   }
 }
 .form-group {
-    position:absolute;
-    padding-top: 20%;
-    margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .radio,
 .checkbox {
@@ -2968,11 +2965,8 @@ select[multiple].form-group-lg .form-control {
   }
 }
 .btn {
-  width: 80px;
-  height: 40px;
-  display: static;
-  padding-left: 12px;
-  padding-right: 12px;
+  display: inline-block;
+  padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
@@ -2988,7 +2982,7 @@ select[multiple].form-group-lg .form-control {
       -ms-user-select: none;
           user-select: none;
   background-image: none;
-  border: 1px solid #5cb85c;
+  border: 1px solid transparent;
   border-radius: 4px;
 }
 .btn:focus,
@@ -3025,9 +3019,9 @@ fieldset[disabled] .btn {
   opacity: .65;
 }
 .btn-default {
-  color: #5cb85c;
+  color: #333;
   background-color: #fff;
-  border-color: #5cb85c;
+  border-color: #ccc;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3035,9 +3029,9 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #fff;
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3115,9 +3109,9 @@ fieldset[disabled] .btn-primary.active {
   background-color: #fff;
 }
 .btn-success {
-  color: #5cb85c;
-  background-color: #fff;
-  border-color: #5cb85c;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -3126,8 +3120,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
 }
 .btn-success:active,
 .btn-success.active,
@@ -4733,6 +4727,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 .label {
   display: inline;
+  padding: .2em .6em .3em;
   font-size: 75%;
   font-weight: bold;
   line-height: 1;
@@ -4972,9 +4967,6 @@ a.thumbnail.active {
   color: #66512c;
 }
 .alert-danger {
-    width: 70%;
-    left: 15%;
-    position: absolute;
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
