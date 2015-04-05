@@ -12,6 +12,7 @@ $(document).ready(function(){
     $('#again').hide();
     $('#menu-table').hide();
     $('#save').hide();
+    $('#chart').hide();
 });
 
 $('.form-control').keyup(function(event){
@@ -84,8 +85,8 @@ $('#search').click(function() {
     
     $('#money-input').val("");
     $('#restaurant-input').val("");
-    $('#menu-table').delay('show').fadeIn('slow');
     // fade in restaurant name
+    $('#chart').delay("slow").fadeIn("slow");
     
     
     
@@ -160,7 +161,9 @@ $('#search').click(function() {
 								
 								var nextRow = '<tr><td>' + menu[i]['entries']['items'][j]['name'] + '</td>'
 								+ '<td>' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
-								$('#menu-table tbody').append(nextRow);								
+								$('#menu-table tbody').append(nextRow);
+                                $('#menu-table').delay('show').fadeIn('slow');
+
 
 							}
 						}
