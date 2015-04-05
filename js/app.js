@@ -474,7 +474,7 @@ $('#search').click(function() {
                                 
                                 $('#menu-table').delay('show').fadeIn('slow');
                                 
-                                $('.element').show();
+                                $('.element').delay("slow").fadeIn('slow');
                                 
                                 go();
 							}

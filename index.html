@@ -38,9 +38,12 @@
         -webkit-animation: blink 0.7s infinite;
         -moz-animation: blink 0.7s infinite;
         animation: blink 0.7s infinite;
-        color:#5cb85c;
-        padding-top: 15px;
-        font-size: 30px;
+        color:#5cb85c;        
+        position: static;
+        margin-top: 50px;
+        padding-top: 50px;
+        padding-bottom: 30px;
+        font-size: 36px;
         font-family: 'geosanslightregular';
         letter-spacing: -1px;
     }
@@ -62,8 +65,10 @@
         
     .element{
         color:#5cb85c;
-        padding-top: 15px;
-        font-size: 30px;
+        margin-top: 50px;
+        padding-top: 50px;
+        padding-bottom: 30px;
+        font-size: 36px;
         font-family: 'geosanslightregular';
         letter-spacing: -1px;
     }
@@ -128,6 +133,7 @@
         
     label{
         color:#5cb85c;
+        position: static;
         padding-right: 4px;
         margin-bottom: -20px;
         font-size: 25px;
@@ -207,11 +213,13 @@
 
         </div>
         
+        <center><div id="chart" class = "taquino" style = padding-bottom: 30px></div></center>
+        
         <div class="row">
             <center>
                 <form class="form-inline" role="form">
                     <div class="form-group" id = "restaurant">
-                        <span class = "element"><span class = "typed-cursor">|</span></span>
+                        <span class = "element"></span>
                     </div>
                 </form>
             </center>
@@ -219,7 +227,7 @@
         
         
         
-        <div id="chart" class = "taquino"></div>
+        
         <div class="row">
             <center>
                 
@@ -267,8 +275,9 @@
     <script>
       function go(){
           $(".element").typed({
-            strings: ["We have found that the following"],
-            typeSpeed: 1
+            strings: ["Feel free to enjoy any of the following:"],
+            typeSpeed: 1,
+            startDelay: 2000,
           });
       };
     </script>
