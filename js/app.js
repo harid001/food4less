@@ -80,9 +80,8 @@ $('#search').click(function() {
     else{
     $('#calories').fadeOut('slow'); 
     $('#t1-caption').text("menu for " + tname);
-    $('#t2-caption').text("nutrition score index");
     $('#sidenote').fadeOut("slow");
-    
+    $("#final-table").find("tr:gt(0)").remove();
     click = 0;
     //reset chart
     //reset variables
@@ -113,7 +112,7 @@ $('#search').click(function() {
         //'37.3175,-122.0419'
 
 	var query = {
-		ll : '34.0722,-118.4441',
+		ll : '37.3175,-122.0419',
 		radius : '1000',
 		categoryId : '4d4b7105d754a06374d81259',
 		clientId : 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ',
@@ -123,7 +122,7 @@ $('#search').click(function() {
 	};
 
 	$.get('https://api.foursquare.com/v2/venues/search?ll=' + query['ll'] 
-		+ '&radius=' + query['radius'] 
+		+ '&radius=' + query['radius']
 		+ '&categoryId=' + query['categoryId'] 
 		+ '&client_id=' + query['clientId'] 
 		+ '&client_secret=' + query['clientSecret'] 
@@ -475,24 +474,31 @@ $('#search').click(function() {
                                 
                                 
                                 $('#chart').delay("slow").fadeIn("slow");
+
                                 
                                 for(var i = 0; i < 5; i++){
+                                    console.log(dataObj2[0]['food']);
                                     try{
-                                    var nextRow = '<tr><td class = "price">' + dataObj2[i]['food']+ '</td>'
-								    + '<td class = "price">' + dataObj2[i]['prices'] + '</td><td class = "price" >' + dataObj2[i]       ['calories']
-                                    + '</td><td class = "price">' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]['protein'] + '</td></tr>';
-                                    $('#final-table tbody').append(nextRow);
+                                        
+                                        var nextRow = '<tr><td class = "price">' + dataObj2[i]['food']+ '</td>'
+                                        + '<td class = "price">' + dataObj2[i]['prices'] + '</td><td class = "price" >' + dataObj2[i]                                                ['calories']
+                                        + '</td><td class = "price">' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]                                             ['protein'] + '</td></tr>';
+                                        
+                                        $('#final-table tbody').append(nextRow);
+                                        
                                     } catch(err) {continue;}
                                 }
                                 
+                                $('.element').delay("slow").fadeIn('slow');
+                                
+                                go();
                                                                 
                                 $('#final-table').delay('slow').fadeIn('slow');
                                 
                                 $('#menu-table').delay('slow').fadeIn('slow');
                                 
-                                $('.element').delay("slow").fadeIn('slow');
                                 
-                                go();
+                                
 							}
                             
 						});
