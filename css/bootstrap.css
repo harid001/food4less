@@ -2528,11 +2528,12 @@ output {
   color: #555;
 }
 .form-control {
+    font-family: 'geosanslightregular';
   display: inline-block;
   width: 250px;
   height: 34px;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;

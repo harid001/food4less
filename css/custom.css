@@ -1,6 +1,11 @@
 .col-center{
   margin:0 auto;
 }
+caption{
+    text-align: center;
+    font-family: 'geosanslightregular';
+    font-size: 24px;
+}
 #search{
 	margin-top: 13px;
 }

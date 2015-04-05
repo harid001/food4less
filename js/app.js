@@ -14,6 +14,7 @@ $(document).ready(function(){
     $('#save').hide();
     $('#chart').hide();
     $("input:text:visible:first").focus();
+    
 });
 
 $('.form-control').keyup(function(event){
@@ -32,6 +33,7 @@ $('#next').click(function() {
     switch(click){
             case 1:
                 tname = $('#restaurant-input').val();
+                $('#t1-caption').text("menu for " + tname);
                
                 if(tname == '' ){
                     click--;
@@ -66,7 +68,6 @@ $('#again').click(function() {
     //reset inputs
     $('#calories-input').val("");
     $('#money-input').val("");
-    $('#restaurant-input').val("");
 });
 
 $('#search').click(function() {
@@ -88,7 +89,6 @@ $('#search').click(function() {
     //reset inputs
     
     $('#money-input').val("");
-    $('#restaurant-input').val("");
     // fade in restaurant name
         
     
@@ -425,10 +425,12 @@ $('#search').click(function() {
                                 var calories = ['Calories'];
                                 var foodNames = [];    
                             
-                                for(var l = 0; l < dataObj2.length; l++){
-                                    cost.push(dataObj2[l]["prices"]);
-                                    calories.push(dataObj2[l]["calories"]);
-                                    foodNames.push(dataObj2[l]["food"]);
+                                for(var l = 0; l < 5; l++){
+                                    try {
+                                        cost.push(dataObj2[l]["prices"]);
+                                        calories.push(dataObj2[l]["calories"]);
+                                        foodNames.push(dataObj2[l]["food"]);
+                                    } catch(err) {continue;}
                                 }
                                 
                                  var chart = c3.generate({
