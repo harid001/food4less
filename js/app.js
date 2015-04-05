@@ -16,6 +16,7 @@ $(document).ready(function(){
     $("input:text:visible:first").focus();
     $('.element').hide();
     $('#final-table').hide();
+    $('#calories-input').hide();
     
 });
 
@@ -62,6 +63,21 @@ $('#next').click(function() {
     }
 });
 
+$('#low').click(function(){
+    $('#calories-input').val('low');
+    $('#search').click();
+});
+    
+$('#medium').click(function(){
+    $('#calories-input').val('medium');
+    $('#search').click();
+});
+
+$('#high').click(function(){
+    $('#calories-input').val('high');
+    $('#search').click();
+});
+
 $('#again').click(function() {
     click = 0;
     //reset chart
@@ -73,8 +89,7 @@ $('#again').click(function() {
 });
 
 $('#search').click(function() {
-    
-    var calories = $('#calories-input').val();
+    var calories = $('#calories-input').val()
     if(calories == ''){
     }
     else{
