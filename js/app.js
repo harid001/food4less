@@ -515,6 +515,11 @@ $('#search').click(function() {
                                 
                                 $('#eat').delay('slow').fadeIn('slow');
                                 
+                                $('#eat').click(function(){
+                                    window.open('http://google.com/#q=' + $('#restaurant-input').text().replace('/s','+')); 
+                                    //#q=' + $('#restaurant-input').val();   
+                                });
+                                
                                 
 							}
                             
