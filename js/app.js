@@ -166,16 +166,22 @@ $('#search').click(function() {
 
 								
 								food.push(menu[i]['entries']['items'][j]['name']);
-                                prices.push(menu[i]['entries']['items'][j]['price']);
+                                if(menu[i]['entries']['items'][j]['price'] === undefined){
+                                    var o = Math.floor((Math.random()*5)+1);
+										if (o < 3)
+											o+=0.99;
+										else
+											o+=0.49;
+                                    prices.push(o);
+                                }
+                                else{
+                                    prices.push(menu[i]['entries']['items'][j]['price']);
+                                }
 								
 								var nextRow = '<tr><td>' + menu[i]['entries']['items'][j]['name'] + '</td>'
-								+ '<td id = "price">' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
+								+ '<td class = "price">' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
 								$('#menu-table tbody').append(nextRow);
                                 
-                                
-                                
-                               
-
 
 							}
 						}
@@ -207,27 +213,29 @@ $('#search').click(function() {
 											'calories' : data['hits'][j]['fields']['nf_calories'],
 											'fat' : data['hits'][j]['fields']['nf_total_fat'],
 											'protein' : data['hits'][j]['fields']['nf_protein'],
-                                            'prices' : 0
+                                            'prices' : prices[i]
 										});
-                                        if(prices[i] !== "undefined") { dataObj['prices'] = prices[i]; }
+                                        //if(prices[i] !== "undefined") { dataObj['prices'] = prices[i]; }
 										break;
 									} 
 								}
                                 
-                                for(var z = 0; z < dataObj.length; z++){
-									if (prices[z] === undefined){
-										var r = Math.floor((Math.random()*5)+1);
-										if (r < 3)
-											r+=0.99;
-										else
-											r+=0.49;
-										
-										dataObj[z]["prices"] = r;
-
-									}
-                                    //$('#menu-table tbody:nth-child(' + z + '):nth-child(2)').val(dataObj[z]["prices"]);
-                                    
-                                }
+//                                for(var z = 0; z < dataObj.length; z++){
+//									if (prices[z] === undefined){
+//										var r = Math.floor((Math.random()*5)+1);
+//										if (r < 3)
+//											r+=0.99;
+//										else
+//											r+=0.49;
+//										
+//										dataObj[z]["prices"] = r;
+//                                        prices[z] = r;
+//
+//									}
+//                                    prices[z] = r;
+//                                    //$('#menu-table tbody:nth-child(' + z + '):nth-child(2)').val(dataObj[z]["prices"]);
+//                                    
+//                                }
                                 
                                 for(var x = 0; x < dataObj.length; x++){
 									// take out prices it screws up 
@@ -242,6 +250,9 @@ $('#search').click(function() {
 									
 								}   
 							}
+                            $(".price").each(function(index){
+                                $(this).text(prices[index]);
+                            });
                             
                             var calUI = 300;
                            
@@ -250,7 +261,7 @@ $('#search').click(function() {
 							for (var i = 0; i < dataObj.length; i++){
 								sum += dataObj[i]["calories"];
 							}
-
+                            
 							calUI = sum/dataObj.length;
                             
                            
