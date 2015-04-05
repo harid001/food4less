@@ -430,8 +430,8 @@ $('#search').click(function() {
                                             Calories: '#000000'
                                         },
                                         axes: {
-                                            cost: 'y',
-                                            calories: 'y2'
+                                            Calories: 'y',
+                                            Cost: 'y2'
                                         }
                                     },
                                     bar: {
