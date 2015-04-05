@@ -111,8 +111,6 @@ $('#search').click(function() {
 								for(var j = 0; j < data["hits"].length; j++){
 									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
 									var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
-									console.log(f);
-									console.log(of);
 									if(of.indexOf(f) > -1){
 										dataObj.push( {
 											"food" : food[i],
