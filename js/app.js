@@ -70,6 +70,8 @@ $('#search').click(function() {
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
 				var food = [];
+				var prices = [];
+				var dataObj = [];
 
 				$.get('https://api.foursquare.com/v2/venues/' + id + '/menu?' + 'client_id=' + clientId
 					+ '&client_secret=' + clientSecret + '&v=20140806&m=foursquare',
@@ -80,10 +82,11 @@ $('#search').click(function() {
 
 								
 								food.push(menu[i]["entries"]["items"][j]["name"]);
-								
+								prices.push( menu[i]["entries"]["items"][j]["price"]);
 								var nextRow = '<tr><td>' + menu[i]["entries"]["items"][j]["name"] + '</td>'
 								+ '<td>' + menu[i]["entries"]["items"][j]["price"] + '</td>' + '</tr>';
-								$('#menu-table tbody').append(nextRow);								
+								$('#menu-table tbody').append(nextRow);
+																
 
 							}
 						}
@@ -93,35 +96,70 @@ $('#search').click(function() {
 								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
 								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
 
-						var dataObj = [];
+
+						
 
 						var CAL = 1;
-						var PRICE = 80;
+						var PRICE = 75;
 						var LOW_PROTEIN = 1000;
 						var HIGH_PROTEIN = 10000;
 						var LOW_FAT = 100;
 						var HIGH_FAT = 10;
-						
+
 						$.get(q,function(data){
 							for(var i = 0; i < food.length; i++){
 								for(var j = 0; j < data["hits"].length; j++){
 									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
 									var of = data["hits"][j]["fields"]["item_name"].toLowerCase().replace(/[^a-z0-9]+/g,'');
+									console.log(f);
+									console.log(of);
 									if(of.indexOf(f) > -1){
 										dataObj.push( {
 											"food" : food[i],
 											"calories" : data["hits"][j]["fields"]["nf_calories"],
 											"fat" : data["hits"][j]["fields"]["nf_total_fat"],
 											"protein" : data["hits"][j]["fields"]["nf_protein"],
-
+											"prices" : 0
 											
 
-											"score" : ((1 / (((parseInt(data["hits"][j]["fields"]["nf_calories"]))+1)/CAL)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/LOW_PROTEIN) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*HIGH_FAT)))*10000000
+											//"score" : ((1 / (((parseInt(data["hits"][j]["fields"]["nf_calories"]))+1)/CAL)) * ((parseInt(data["hits"][j]["fields"]["nf_protein"])+1)/LOW_PROTEIN) * (1/((parseInt(data["hits"][j]["fields"]["nf_total_fat"])+1)*HIGH_FAT)))*10000000
 
 										});
+										if(prices[i] !== "undefined") { dataObj["prices"] = prices[i];}
 										break;
 									} 
+								}
+
+								//console.log(dataObj);
+
+
+								// debug these two for loops
+								for(var z = 0; z < dataObj.length; z++){
+									if (prices[z] === undefined){
+										var r = Math.floor((Math.random()*5)+1);
+										if (r < 3)
+											r+=0.99;
+										else
+											r+=0.49;
+										
+										dataObj[z]["prices"] = r;
+
+									}
 								}	
+
+
+								for(var x = 0; x < dataObj.length; x++){
+									// take out prices it screws up 
+									console.log(dataObj[x]);
+									
+									var calor = (1 / (((dataObj[x]["calories"])+1)/CAL));
+									var prot = ((dataObj[x]["protein"]+1)/LOW_PROTEIN);
+									var tfat = (1/((dataObj[x]["fat"]+1)*HIGH_FAT));
+									var prce = (1/((dataObj[x]["prices"]+.01)*PRICE));
+
+									dataObj[x]["score"] = (calor * prot * tfat * prce)*10000000;
+									
+								}
 							}
 							
 							var calUI = 300;
@@ -132,7 +170,6 @@ $('#search').click(function() {
 							}
 
 							calUI = sum/dataObj.length;
-							
 							
 
 							function compare(a,b) {
@@ -145,7 +182,6 @@ $('#search').click(function() {
 							}						
 
 							//dataObj.sort(compareCal);
-							
 							
 
 							console.log(dataObj);
