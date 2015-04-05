@@ -31,10 +31,9 @@ $('#next').click(function() {
     switch(click){
             case 1:
                 tname = $('#restaurant-input').val();
-                console.log(click);
+               
                 if(tname == '' ){
                     click--;
-                    console.log(click);
                 } else{
                     $('#restaurant').fadeOut('slow');
                     
@@ -230,7 +229,7 @@ $('#search').click(function() {
                                 
                                 for(var x = 0; x < dataObj.length; x++){
 									// take out prices it screws up 
-									console.log(dataObj[x]);
+								
 									
 									var calor = (1 / (((dataObj[x]["calories"])+1)/CAL));
 									var prot = ((dataObj[x]["protein"]+1)/LOW_PROTEIN);
@@ -367,12 +366,13 @@ $('#search').click(function() {
 							
 
 							var dataObj2 = [];
+                            var maxMoney = $('#money-input').val();
+                            console.log(maxMoney);
 							// deletes objects with calories out of bounds	
 							for (var i = 0 ; i < dataObj.length; i++){
-								if (dataObj[i]["calories"] > calUI){
+								if (dataObj[i]["calories"] < calUI || dataObj[i]["prices"] < parseInt(maxMoney)){
 									//delete dataObj[i];
-								}else {
-									dataObj2.push(dataObj[i]);
+                                    dataObj2.push(dataObj[i]);
 								}
 							}
 
@@ -403,7 +403,6 @@ $('#search').click(function() {
 									}
 								}
 
-								//console.log(ans);
                                 
                                 
 
