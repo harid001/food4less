@@ -1,4 +1,7 @@
 var click = 0;
+var rest_name = "";
+var loc = "";
+var cost;
 $(document).ready(function(){
 
 	$('.alert').hide();
@@ -24,14 +27,17 @@ $('.form-control').keyup(function(event){
 
 $('#next').click(function() {
     click++;
+    // console.log(click);
     switch(click){
             case 1:
-                var location = $('#restaurant-input').val();
+
+                var loc = $('#restaurant-input').val();
+
                 
-                console.log(click);
-                if(location == '' ){
+                console.log(loc);
+                if(loc == '' ){
                     click--;
-                    console.log(click);
+                    // console.log(click);
                 } else{
                     $('#restaurant').fadeOut('slow');
                     
@@ -40,7 +46,7 @@ $('#next').click(function() {
                 }
                 break;
             case 2:
-                var cost = $('#money-input').val();
+                cost = $('#money-input').val();
                 
                 $('#money').fadeOut('slow'); 
                 $('#next').fadeOut("slow");
@@ -66,26 +72,18 @@ $('#again').click(function() {
 
 $('#search').click(function() {
     
-    var calories = $('#calories-input').val();
-    
-    $('#calories').fadeOut('slow'); 
-    $('#search').fadeOut('slow');
-    $('#sidenote').fadeOut("slow");
-    
-    // fade in restaurant name
-    $('#again').delay("slow").fadeIn("slow");
+
     
             
     
-	
-
-
-	// if (navigator.geolocation) {
- //    	navigator.geolocation.getCurrentPosition(function(position){
- //    		console.log('Your latitude is :' + position.coords.latitude + ' and longitude is ' + position.coords.longitude);
+	// if (navigator.geoloc) {
+ //    	navigator.geoloc.getCurrentPosition(function(position){
+ //    		console.log('Your latitude is :' + position.coords.latitude + 
+ 	// ' and longitude is ' + position.coords.longitude);
  //    	});
 	// } else {
- //    	alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+ //    	alert('It seems like Geoloc, which is required for this page, is not enabled in your browser.
+  // Please use a browser which supports it.');
 	// }
 
 	var query = {
@@ -110,18 +108,25 @@ $('#search').click(function() {
 			var id = '';
 			for( var i = 0; i < response['venues'].length; i++){
 
+				console.log(response['venues'][i]['name'].toLowerCase().replace(/[^a-z0-9]+/g,""));
+				console.log(loc);
+				console.log(loc.toLowerCase().replace(/[^a-z0-9]+/g,""));
 
-				if((response['venues'][i]['name'].toLowerCase().replace(/[^a-z0-9]+/g,''))
-					.indexOf(location.toLowerCase().replace(/[^a-z0-9]+/g,'')) > -1){
+				if((response['venues'][i]['name'].toLowerCase().replace(/[^a-z0-9]+/g,""))
+					.indexOf(loc.toLowerCase().replace(/[^a-z0-9]+/g,"")) > -1){
 					
-					// console.log(location.toLowerCase().replace(/\s/g,''));
+
+
 					id = response['venues'][i]['id'];
 					// console.log(id);
 					break;
 				}
 			}
+			
+			rest_name = (response['venues'][i]['name']);
+
 			if(id.length === 0){
-				console.log('unable to find restaurant near location');
+				console.log('unable to find restaurant near loc');
 				$('.alert').show();
 			}
 			else{
@@ -130,16 +135,17 @@ $('#search').click(function() {
 
 				$('.alert').hide();
 
-				$('#searchbox').val(response['venues'][i]['name']);
+				
 
 				var clientSecret = 'IIKJYI12T5IUQ5MUFB0STWXU4BZ5WNTESVCLW1HOFJQCUPTV';
 				var clientId = 'TFXPVJEYX03UAUEMVSNRDWD40BWCECBN14G4SILJLLNQHNHQ';
 				var food = [];
+				var menu = [];
 
 				$.get('https://api.foursquare.com/v2/venues/' + id + '/menu?' + 'client_id=' + clientId
 					+ '&client_secret=' + clientSecret + '&v=20140806&m=foursquare',
 					function (data) {
-						var menu = data['response']['menu']['menus']['items'][0]['entries']['items'];
+						menu = data['response']['menu']['menus']['items'][0]['entries']['items'];
 						for(var i = 0; i < menu.length; i++){
 							for(var j = 0; j < menu[i]['entries']['items'].length; j++){
 
@@ -153,7 +159,7 @@ $('#search').click(function() {
 							}
 						}
 						var q = 'https://api.nutritionix.com/v1_1/search/' 
-								+ location 
+								+ loc
 								+ '?results=0%3A50&fields='
 								+ 'item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_protein%2Cnf_total_fat%2Cnf_sodium'
 								+ '&appId=afe236a3&appKey=a612738872e7761fa189ce3794796d50';
@@ -165,13 +171,15 @@ $('#search').click(function() {
 							for(var i = 0; i < food.length; i++){
 								for(var j = 0; j < data['hits'].length; j++){
 									var f = food[i].toLowerCase().replace(/[^a-z0-9]+/g,'');
-									var of = data['hits'][j]['fields']['item_name'].toLowerCase().replace(/[^a-z0-9]+/g,'');
+									
+									var of = data['hits'][j]['fields']['item_name']
+									.toLowerCase().replace(/[^a-z0-9]+/g,'');
+									
 									if(of.indexOf(f) > -1){
 										dataObj[food[i]] = {
 											'calories' : data['hits'][j]['fields']['nf_calories'],
 											'fat' : data['hits'][j]['fields']['nf_total_fat'],
 											'protein' : data['hits'][j]['fields']['nf_protein']
-
 										};
 										break;
 									} 
@@ -179,13 +187,7 @@ $('#search').click(function() {
 							}
 							console.log(dataObj);
 						});
-
 					});
-
 			}
-
-
-
-
 		});
 });
