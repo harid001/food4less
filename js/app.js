@@ -80,13 +80,16 @@ $('#search').click(function() {
     click = 0;
     //reset chart
     //reset variables
+
+    
     $('#restaurant').delay("slow").fadeIn("slow");
+    
     //reset inputs
     
     $('#money-input').val("");
     $('#restaurant-input').val("");
     // fade in restaurant name
-    $('#chart').delay("slow").fadeIn("slow");
+        
     
     
     
@@ -138,7 +141,8 @@ $('#search').click(function() {
 				$('.alert').show();
 			}
 			else{
-
+                $('.form-group').delay("fast").animate({paddingTop: '0'},800, "linear");
+                $('#chart').delay("slow").fadeIn("slow");
 				$('#menu-table tbody').empty();
 
 				$('.alert').hide();
@@ -160,7 +164,7 @@ $('#search').click(function() {
 								food.push(menu[i]['entries']['items'][j]['name']);
 								
 								var nextRow = '<tr><td>' + menu[i]['entries']['items'][j]['name'] + '</td>'
-								+ '<td>' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
+								+ '<td id = "price">' + menu[i]['entries']['items'][j]['price'] + '</td>' + '</tr>';
 								$('#menu-table tbody').append(nextRow);
                                 $('#menu-table').delay('show').fadeIn('slow');
 
