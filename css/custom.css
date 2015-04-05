@@ -1,6 +1,9 @@
 .col-center{
   margin:0 auto;
 }
+.modal-content {
+    margin:0 auto;
+}
 caption{
     text-align: center;
     font-family: 'geosanslightregular';

@@ -19,6 +19,12 @@ $(document).ready(function(){
     $('#calories-input').hide();
     $('#eat').hide();
     
+    $.fn.redraw = function(){
+        $(this).each(function(){
+        var redraw = this.offsetHeight;
+    });
+};
+    
 });
 
 $('.form-control').keyup(function(event){
@@ -455,7 +461,9 @@ $('#search').click(function() {
                                 }
                                 
                                  var chart = c3.generate({
+                                    
                                     data: {
+                                        
                                         columns: [
                                             cost,
                                             calories
@@ -488,6 +496,24 @@ $('#search').click(function() {
                                     }
                                 });
                                 
+                                 var test = c3.generate({
+                                    bindto: '.modal-content',
+                                    data: {
+                                        
+                                        columns: [
+                                            ['data1', 30],
+                                            ['data2', 120],
+                                        ],
+                                        type : 'donut',
+                                        },
+                                        donut: {
+                                            title: "Iris Petal Width"
+                                        }
+                                });
+                                
+                                
+                               
+                                $(".modal-content").hide().fadeIn('fast');
                                 
                                 $('#chart').delay("slow").fadeIn("slow");
 
@@ -496,9 +522,11 @@ $('#search').click(function() {
                                     console.log(dataObj2[0]['food']);
                                     try{
                                         
+                                        //data-toggle="modal" data-target=".bs-example-modal-sm"
+                                        
                                         var nextRow = '<tr><td>' + dataObj2[i]['food']+ '</td>'
-                                        + '<td class = "price">' + dataObj2[i]['prices'] + '</td><td class = "price" >' + dataObj2[i]                                                ['calories']
-                                        + '</td><td class = "price">' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]                                             ['protein'] + '</td></tr>';
+                                        + '<td class = "price" data-toggle="modal" data-target=".bs-example-modal-lg">' + dataObj2[i]['prices'] + '</td><td class = "price" data-toggle="modal" data-target=".bs-example-modal-lg">' + dataObj2[i]                                                ['calories']
+                                        + '</td><td class = "price" data-toggle="modal" data-target=".bs-example-modal-lg" >' +  dataObj2[i]['fat'] + '</td><td class = "price">' + dataObj2[i]                                             ['protein'] + '</td></tr>';
                                         
                                         $('#final-table tbody').append(nextRow);
                                         
@@ -519,6 +547,8 @@ $('#search').click(function() {
                                     window.open('http://google.com/#q=' + $('#restaurant-input').text().replace('/s','+')); 
                                     //#q=' + $('#restaurant-input').val();   
                                 });
+                                
+                                $(".modal").redraw();
                                 
                                 
 							}
