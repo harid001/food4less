@@ -10,7 +10,7 @@ Uses:
 * Foursquare
 
 ## Usage
-Access the site [here](food4less.azurewebsites.net)
+Access the site [here](http://food4less.azurewebsites.net)
 
 HTML5 site works on all platforms
 
